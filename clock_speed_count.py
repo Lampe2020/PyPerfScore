@@ -1,6 +1,6 @@
 import time as t
 
-def numbers_racing_up(runs_max = 100000):
+def counter(runs_max = 100000):
 	runs_passed = 0
 	global number
 	number = 0
@@ -21,7 +21,7 @@ def pts_down():
 		t.sleep(0.25)
 		number = number - 10000
 		sec += 1
-		print(number, "Punkte nach", sec, "Sekunden...")
+		print(number, "score after", sec, "seconds...")
 
-with numbers_racing_up():
+with counter():
 	pts_down()
