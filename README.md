@@ -4,7 +4,7 @@ Before it exits it prints the resulting score to the screen, rounding the time i
 And the rounding has another benefit: it makes the measuring insccuracy completely unimportant. 
 
 # Future plans for developing this program:
-I want to add a GUI using *tkinter* to make it more easily usable even for non-professional users. 
+I want to add a GUI using *tkinter* to make it more easily usable even for non-command-line users. 
 
 # Why is there a difference between release tags and release titles? 
 pre-alpha will be version 0.1.x, 
