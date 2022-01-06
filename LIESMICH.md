@@ -16,3 +16,4 @@ Die pre-alpha-Versionen bekommen die Versionsnummern 0.1.x, alpha 0.2.x, beta 0.
 # Systemvorraussetzungen:
 -> Python 3.5 oder höher   
 -> Alles, um Python 3.5 oder höher ausführen zu können   
+-> Python-Modul *tkinter* (wird nur versucht, zu laden, wenn eines der beiden Kommandozeilenargumente "--load-gui" oder "--force-gui" genutzt wird)
