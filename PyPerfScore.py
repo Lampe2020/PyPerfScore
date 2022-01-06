@@ -22,13 +22,19 @@ def run_test(is_graphical = False):
                     print("So the score is " + str(round(score)) + ".")
                     exit()
 
-def load_gui():
+def load_gui(force_to_run = False):
     gui = Tk()
     gui.title("PyPerfScore GUI")
-    messagebox.showinfo("Welcome!", """The GUI isn't implemented just yet, please check for new versions that have this feature implemented!\nClicking "OK" below will run the test anyway in command-line mode.""")
-    print("The GUI isn't implemented yet, anyway, the test will be performed in command-line mode below:")
-    gui.destroy()
-    run_test(True)
+    if force_to_run == False:
+        messagebox.showinfo("Welcome!", """The GUI isn't implemented just yet, please check for new versions that have this feature implemented!\nClicking "OK" below will run the test anyway in command-line mode.""")
+        print("The GUI isn't fully implemented yet, anyway, the test will be performed in command-line mode below:")
+        gui.destroy()
+        run_test(True)
+    if force_to_run == True:
+        print("Ok, the GUI will be loaded if possible. Note that this will probably cause a traceback.\nThe creator of this code is not responsible for any damage caused by this part of the code itself or its use!")
+        messagebox.showinfo("Welcome!", """The GUI isn't fully implemented just yet!\nAnyway, since you run this program with "--force-gui" it will try to load the full GUI. Note that this will probably cause a traceback.\nThe creator of this code is not responsible for any damage caused by this part of the code itself or its use!""")
+        #graphical code goes here
+        print("End of code.")
     
 def ask_for_args():
     args = sys.argv
@@ -36,8 +42,11 @@ def ask_for_args():
         if args[-1] == "--load-gui":
             print("Loading GUI...")
             load_gui()
+        elif args[-1] == "--force-gui":
+            print("Loading GUI...")
+            load_gui(True)
         else:
-            print("""Incorrect argument used!\nThe only argument that will be accepted is "--load-gui"!""")
+            print("""Incorrect argument used!\nThe only arguments that will be accepted are "--load-gui" and "--force-gui".\n"--load-gui" will only load the parts of the GUI that are fully implemented by now, "--force-gui" will try to run the full GUI even though some parts may cause crashes.""")
             exit()
     elif len(args) >= 3:
         print("Too many arguments!\n(This program only takes one...)")
