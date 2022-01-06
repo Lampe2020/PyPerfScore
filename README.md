@@ -15,4 +15,4 @@ after that we'll get versions 1.x.x, 2.x.x, and so on.
 # Dependencies:
 -> Python 3.5 or higher   
 -> everything to run Python 3.5 or higher  
--> Python module *tkinter* (will only be tried to load if "--load-gui" or "--force-gui" command-line arguments are activated)
+-> Python module *tkinter* (will only be tried to load if "--load-gui" or "--force-gui" command-line arguments are used)
