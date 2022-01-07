@@ -61,6 +61,7 @@ try:
     import tkinter
 except ImportError:
     print("""Importing Python module "tkinter" failed, you will only be able to run this program in command-line mode!""")
+    run_test()
 else:
     from tkinter import *
     from tkinter import messagebox
