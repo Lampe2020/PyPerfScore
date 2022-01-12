@@ -69,4 +69,5 @@ else:
         from tkinter import messagebox
         ask_for_args()
     except KeyboardInterrupt:
+        print("\n[Ctrl]+[C] was pressed, exiting...")
         pass
