@@ -20,7 +20,7 @@ def run_test(is_graphical = False):
                     print("Your computer needed " + str(round(time_to_complete, 3)) + " seconds to count from zero to " + str(runs_max) + " as fast as it could.")
                     score = runs_max / time_to_complete
                     print("So the score is " + str(round(score)) + ".")
-                    exit()
+                    return
 
 def load_gui(force_to_run = False):
     gui = Tk()
@@ -54,7 +54,7 @@ def ask_for_args():
         print("Too many arguments!\n(This program only takes one...)")
         exit()
     elif len(args) == 1:
-        print("""No command-line options were detected, running in command-line mode.\nIf you intended to run this program in graphical mode, press [Ctrl] + [C] now to cancel and re-run this program with the argument "--load-gui".\nDon't worry if a traceback is generated when pressing [Ctrl] + [C], that's intended Python behaviour.""")
+        print("""No command-line options were detected, running in command-line mode.\nIf you intended to run this program in graphical mode, press [Ctrl] + [C] now to cancel and re-run this program with the argument "--load-gui".""")
         run_test()
     else:
         print("An unknown error occurred while checking for command-line options, please report this behaviour and the conditions under which this error occurred!")
@@ -64,6 +64,9 @@ try:
 except ImportError:
     print("""Importing Python module "tkinter" failed, you will only be able to run this program in command-line mode!""")
 else:
-    from tkinter import *
-    from tkinter import messagebox
-    ask_for_args()
+    try:
+        from tkinter import *
+        from tkinter import messagebox
+        ask_for_args()
+    except KeyboardInterrupt:
+        pass
