@@ -32,7 +32,7 @@ def load_gui(force_to_run = False):
         run_test(True)
     if force_to_run == True:
         print("Ok, the GUI will be loaded if possible. Note that this will probably cause a traceback.\nThe creator of this code is not responsible for any damage caused by this part of the code itself or its use!")
-        messagebox.showinfo("Welcome!", """The GUI isn't fully implemented just yet!\nAnyway, since you run this program with "--force-gui" it will try to load the full GUI. Note that this will probably cause a traceback.\nThe creator of this code is not responsible for any damage caused by this part of the code itself or its use!""")
+        messagebox.showinfo("Welcome!", """The GUI isn't fully implemented just yet!\nAnyway, since you run this program with "--full-gui" it will try to load the full GUI. Note that this will probably cause a traceback.\nThe creator of this code is not responsible for any damage caused by this part of the code itself or its use!""")
         #graphical code goes here
         messagebox.showinfo("Done!", """Perfect, the part of the code that is still in development seems to not have crashed anything! If you like to submit issues that occurred, please go to "https://www.github.com/Stehlampe2020/PyPerfScore/issues" to report them.\n\n*End of Code*""")
         gui.destroy()
@@ -41,20 +41,23 @@ def load_gui(force_to_run = False):
 def ask_for_args():
     args = sys.argv
     if len(args) == 2:
-        if args[-1] == "--load-gui":
+        if args[1] == "--gui":
             print("Loading GUI...")
             load_gui()
-        elif args[-1] == "--force-gui":
+        elif args[1] == "--full-gui":
             print("Loading GUI...")
             load_gui(True)
+        elif args[1] == "--cmdline":
+            print("Running in command-line mode...")
+            run_test(False)
         else:
-            print("""Incorrect argument used!\nThe only arguments that will be accepted are "--load-gui" and "--force-gui".\n"--load-gui" will only load the parts of the GUI that are fully implemented by now, "--force-gui" will try to run the full GUI even though some parts may cause crashes.""")
+            print("""Incorrect argument used!\nThe only arguments that will be accepted are "--cmdline", "--gui" and "--full-gui".\n "--cmdline" will run this program in command-line mode, "--gui" will only load the parts of the GUI that are fully implemented by now and "--full-gui" will try to run the full GUI even though some parts may cause crashes.""")
             exit()
     elif len(args) >= 3:
         print("Too many arguments!\n(This program only takes one...)")
         exit()
     elif len(args) == 1:
-        print("""No command-line options were detected, running in command-line mode.\nIf you intended to run this program in graphical mode, press [Ctrl] + [C] now to cancel and re-run this program with the argument "--load-gui".""")
+        print("""No command-line options were detected, running in command-line mode.\nIf you intended to run this program in graphical mode, press [Ctrl] + [C] now to cancel and re-run this program with the argument "--gui".""")
         run_test()
     else:
         print("An unknown error occurred while checking for command-line options, please report this behaviour and the conditions under which this error occurred!")
@@ -62,7 +65,7 @@ def ask_for_args():
 try:
     import tkinter
 except ImportError:
-    print("""Importing Python module "tkinter" failed, you will only be able to run this program in command-line mode!""")
+    print("""Importing module "tkinter" failed, you will only be able to run this program in command-line mode!""")
 else:
     try:
         from tkinter import *
