@@ -10,11 +10,11 @@ def run_test(is_graphical = False):
     time_at_start = t.time()
     while runs_passed <= runs_max:
             if runs_passed < runs_max:
-                    print(number, end="\r")
+                    print(number, "/", runs_max, end="\r")
                     number +=1
                     runs_passed += 1
             elif runs_passed == runs_max:
-                    print(number)
+                    print(number, "/", runs_max, end="\r")
                     time_at_finish = t.time()
                     time_to_complete = time_at_finish - time_at_start
                     print("Your computer needed " + str(round(time_to_complete, 3)) + " seconds to count from zero to " + str(runs_max) + " as fast as it could.")
@@ -66,6 +66,7 @@ try:
     import tkinter
 except ImportError:
     print("""Importing module "tkinter" failed, you will only be able to run this program in command-line mode!""")
+    run_test(False)
 else:
     try:
         from tkinter import *
