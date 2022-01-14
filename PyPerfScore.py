@@ -3,6 +3,10 @@
 import sys
 import time as t
 
+global version
+version = "0.2.2-alpha"
+print("You are now running version " + version + """ of PyPerfScore. To check for newer versions, please check out "https://github.com/Stehlampe2020/PyPerfScore".""")
+
 def run_test(is_graphical = False):
     cycles = 1000000    # This is the number that this program counts up to. Chage it if you want, it will only change how long the test takes and how accurate the score is (higher number -> test takes longer -> score is more accurate). 
     number = 0  # This is the number the program counts up from. Do not change this number. 
