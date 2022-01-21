@@ -85,12 +85,16 @@ try:
     import tkinter  # Try to import tkinter
 except ImportError: # If importing tkinter fails: 
     print("""Importing module "tkinter" failed, you will only be able to run this program in command-line mode!""") # Print a little notify that tkinter could not be imported and the test will run in command-line mode. 
-    run_test(False) # directly run the test in command-line mode without even checking for arguments because they are (at least for now) just to tell the program to run in graphical mode, which is impossible without tkinter. 
-else:
     try:
+        run_test(False) # directly run the test in command-line mode without even checking for arguments because they are (at least for now) just to tell the program to run in graphical mode, which is impossible without tkinter. 
+    except KeyboardInterrupt:
+        print("\n[Ctrl]+[C] has been pressed, exiting...")  # Notify the user in command-line that [Ctrl]+[C] has been presseed so it's clear what made the program stop. 
+        pass
+else:
+    try:     #If importing of tkinter doesn't fail, run the program in an own try-except-construct to easily handle KeyboardInterrupts: 
         from tkinter import *
         from tkinter import messagebox
-        ask_for_args()
-    except KeyboardInterrupt:
-        print("\n[Ctrl]+[C] has been pressed, exiting...")
+        ask_for_args()  # Now, let's check for command-line arguments and run the program! (Running the test is done by ask_for_args().)
+    except KeyboardInterrupt:   # If a KeyboardInterrupt occurrs: 
+        print("\n[Ctrl]+[C] has been pressed, exiting...")  # Notify the user in command-line that [Ctrl]+[C] has been presseed so it's clear what made the program stop. 
         pass
