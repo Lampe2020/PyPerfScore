@@ -82,10 +82,10 @@ def ask_for_args():
         return 4    # This time we failed. Returning a 4 for "unknown error while checking for command-line arguments".
 
 try:
-    import tkinter
-except ImportError:
-    print("""Importing module "tkinter" failed, you will only be able to run this program in command-line mode!""")
-    run_test(False)
+    import tkinter  # Try to import tkinter
+except ImportError: # If importing tkinter fails: 
+    print("""Importing module "tkinter" failed, you will only be able to run this program in command-line mode!""") # Print a little notify that tkinter could not be imported and the test will run in command-line mode. 
+    run_test(False) # directly run the test in command-line mode without even checking for arguments because they are (at least for now) just to tell the program to run in graphical mode, which is impossible without tkinter. 
 else:
     try:
         from tkinter import *
