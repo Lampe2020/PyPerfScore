@@ -69,13 +69,14 @@ def ask_for_args():
             run_test(False)
             return 0    # This time we didn't fail. Signaling that to the return code handler. 
         elif args[1] == "--debug":
-            print("To use \"--debug\" you have to use it in combination with one of the other arguments! (\"--cmdline\", \"--gui\" or \"--full-gui\", put one of these in before \"--debug\".)")
+            print("To use \"--debug\" you have to use it in combination with one of the other arguments! (\"--cmdline\", \"--gui\" or \"--full-gui\", put one of these before \"--debug\".)")
+            return 2    # This time fe failed. Returning a 2 for "wrong argument".
         else:
             print("""Incorrect argument used!\nThe only arguments that will be accepted are "--cmdline", "--gui", "--full-gui" and "--debug".\n "--cmdline" will run this program in command-line mode, "--gui" will only load the parts of the GUI that are fully implemented by now and "--full-gui" will try to run the full GUI even though some parts may cause crashes. "--debug" enters an interactive shell if any error occurrs or the program finishes (a bit like the "-i" option for the "python3"-command).""")
             exit()
             return 2    # This time fe failed. Returning a 2 for "wrong argument".
     elif len(args) == 3:
-        if args[1] == "--gui" and args[-1] == "--debug":  # If the second argument is --gui and the last argument is --debug we load the GUI:
+        if args[1] == "--gui" and args[-1] == "--debug":  # If the first (from the users perspective) argument is --gui and the last argument is --debug we load the GUI:
             print("Loading GUI...")
             try:
                 load_gui()
@@ -90,7 +91,7 @@ def ask_for_args():
                 readline.parse_and_bind("tab: complete")
                 code.InteractiveConsole(vars).interact()
             return 0    # This time we didn't fail.
-        elif args[1] == "--full-gui" and args[-1] == "--debug":   # If the second argument is --full-gui we load the GUI with the input value True for force_to_run to load even the unstable parts of the GUI. This option will be commented out as soon as I finish writing the GUI and the program gets into the release phase.
+        elif args[1] == "--full-gui" and args[-1] == "--debug":   # If the first (from the users perspective) argument is --full-gui we load the GUI with the input value True for force_to_run to load even the unstable parts of the GUI. This option will be commented out as soon as I finish writing the GUI and the program gets into the release phase.
             print("Loading GUI...")
             try:
                 load_gui(True)
@@ -105,7 +106,7 @@ def ask_for_args():
                 readline.parse_and_bind("tab: complete")
                 code.InteractiveConsole(vars).interact()
             return 0    # This time we didn't fail.
-        elif args[1] == "--cmdline" and args[-1] == "--debug":    # If the second argument is --cmdline we simply run the test in command-line mode. This option is useless for now but will be useful when I switch the default value for is_graphical  for run_test() from False to True. 
+        elif args[1] == "--cmdline" and args[-1] == "--debug":    # If the first (from the users perspective) argument is --cmdline we simply run the test in command-line mode. This option is useless for now but will be useful when I switch the default value for is_graphical  for run_test() from False to True. 
             print("Running in command-line mode...")
             try:
                 run_test(False)
@@ -129,7 +130,7 @@ def ask_for_args():
             code.InteractiveConsole(vars).interact()
             return 2    # This time fe failed. Returning a 2 for "wrong argument".
     elif len(args) >= 4:    # Warn the user if too many arguments were used and the quit the program. 
-        print("Too many arguments!\n(This program only takes up to two...)")
+        print("Too many arguments!\n(This program only takes up to two of them...)")
         exit()
         return 3    # This time we failed. Returning a 3 for "too many arguments were used".
     elif len(args) == 1:    # If there's only one argument given (the name of the program, like described in line 51 of the source code) we warn the user that no arguments (in the way we think of them when entering them) were detected and run the test in default mode. For now, that's command-line mode but that'll change later.
@@ -147,7 +148,7 @@ except ImportError: # If importing tkinter fails:
     try:
         run_test(False) # directly run the test in command-line mode without even checking for arguments because they are (at least for now) just to tell the program to run in graphical mode, which is impossible without tkinter. 
     except KeyboardInterrupt:
-        print("\n[Ctrl]+[C] has been pressed, exiting...")  # Notify the user in command-line that [Ctrl]+[C] has been presseed so it's clear what made the program stop. 
+        print("\rA KeyboardInterrupt has been raised, exiting...")  # Notify the user in command-line that a KeyboardInterrupt has been raised so it's clear what made the program stop. 
         pass
 else:
     try:     #If importing of tkinter doesn't fail, run the program in an own try-except-construct to easily handle KeyboardInterrupts: 
