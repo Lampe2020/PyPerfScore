@@ -68,6 +68,8 @@ def ask_for_args():
             print("Running in command-line mode...")
             run_test(False)
             return 0    # This time we didn't fail. Signaling that to the return code handler. 
+        elif args[1] == "--debug":
+            print("To use \"--debug\" you have to use it in combination with one of the other arguments! (\"--cmdline\", \"--gui\" or \"--full-gui\", put one of these in before \"--debug\".)")
         else:
             print("""Incorrect argument used!\nThe only arguments that will be accepted are "--cmdline", "--gui", "--full-gui" and "--debug".\n "--cmdline" will run this program in command-line mode, "--gui" will only load the parts of the GUI that are fully implemented by now and "--full-gui" will try to run the full GUI even though some parts may cause crashes. "--debug" enters an interactive shell if any error occurrs or the program finishes (a bit like the "-i" option for the "python3"-command).""")
             exit()
