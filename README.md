@@ -17,9 +17,8 @@ after that we'll get versions 1.x.x, 2.x.x, and so on.
 -> everything to run Python 3.5 or higher  
 -> Python module *tkinter* (will only be tried to load if "--load-gui" or "--force-gui" command-line arguments are used)
    
-   
 # Example run of pyperfscore-0.2.1-alpha
-sorry for the pixelating, that happened when converting the WebM video to GIF   
+sorry for the pixelating, that happened when converting the WebM video to GIF...   
 
 An example run of the program on pretty bad hardware can be found below:   
 ![example_run_of_pyperfscore](https://user-images.githubusercontent.com/94976382/149187622-4e1974ee-e416-4722-aafb-ab3cd72e7574.gif#gh-dark-mode-only)
