@@ -96,5 +96,5 @@ else:
         from tkinter import messagebox
         ask_for_args()  # Now, let's check for command-line arguments and run the program! (Running the test is done by ask_for_args().)
     except KeyboardInterrupt:   # If a KeyboardInterrupt occurrs: 
-        print("\n[Ctrl]+[C] has been pressed, exiting...")  # Notify the user in command-line that [Ctrl]+[C] has been presseed so it's clear what made the program stop. 
+        print("\rA KeyboardInterrupt has been raised, exiting...")  # Notify the user in command-line that a KeyboardInterrupt has been raised so it's clear what made the program stop. 
         pass
