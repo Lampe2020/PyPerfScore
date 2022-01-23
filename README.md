@@ -31,7 +31,7 @@ OS: Linux Mint 20.3 Cinnamon
 (The Windows logo in the bottom left is just a screenshot of the real Windows7 start button, put down there as an image)
 
 # Usage
-*In the examples below I used the installed version, you will have to use the command to start your copy instead of `pyperfscore`, if you don't have it installed as `pyperfscore`!    
+*In the examples below I used the installed version, you will have to use the command to start your copy instead of `pyperfscore`, if you don't have it installed as `pyperfscore`!*    
 
 |Command|Description|
 |-------|-----------|
