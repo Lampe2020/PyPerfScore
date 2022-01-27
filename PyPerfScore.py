@@ -6,8 +6,10 @@ import code
 import readline
 import rlcompleter
 
+gui = None
+
 global version
-version = "0.2.3-alpha"
+version = "0.2.4-alpha"
 print("You are now running version " + version + """ of PyPerfScore. To check for newer versions, please check out "https://github.com/Stehlampe2020/PyPerfScore".""")
 
 def run_test(is_graphical = False):
@@ -27,12 +29,37 @@ def run_test(is_graphical = False):
                         try:
                             score = cycles / time_to_complete   # Compute the score: divide the time the counting took by the number of cycles that the loop was run. 
                         except DivisionByZero:
-                            print("Your computer seems to be too fast to run this test with a target number of", cycles, """cycles. Maybe multiply the value of the variable "cycles"?""")
+                            print("Your computer seems to be too fast to run this test with a target number of", cycles, """cycles. Maybe multiply the value of the variable "cycles" with ten?""")
                             return 1    # Return a 1 as a return code for this function. Return code 1 means "DivisionByZeroError".
                         print("So the score is " + str(round(score)) + ".") # Print the score in a nice form and rounded to a whole number to the terminal.
                         return 0    # Return a zero to signal the return value handler that everything went right.
     elif is_graphical == True:
-        load_gui(True)
+        ver_label_text = "PyPerfScore " + str(version)  # Define the text for the version note. 
+        ver_label = Label(gui, ver_label_text)  # Define the version note itself. 
+        ver_label.pack()    # Put the ver_label into the main window. 
+        while number <= cycles:
+            gui = Tk()
+            gui.title("PyPerfScore")
+            if number < cycles:
+                    gui.title(number, "/", cycles, "- PyPerfscore GUI")    # Print the number the program has by now to the title bar of the main window. Also show the target number for comparison. 
+                    number += 1 # Increment the number by one, this is what actually counts up. 
+            elif number == cycles:
+                    gui.title(number, "=", cycles, "- PyPerfscore GUI")    # Print the final number, now equaling the target number to the title bar of the main window. 
+                    time_at_finish = t.time()   # Take a timestamp. 
+                    time_to_complete = time_at_finish - time_at_start   # Subtract the first timestamp off the second one to get the time in seconds the counting took. 
+                    gui.title("Test completed! - PyPerfscore GUI")
+                    result_label = "Your computer needed " + str(round(time_to_complete, 3)) + " seconds to count from zero to " + str(cycles) + " as fast as it could."    # Put the result into a variable. 
+                    try:
+                        score = cycles / time_to_complete   # Compute the score: divide the time the counting took by the number of cycles that the loop was run. 
+                    except DivisionByZero:
+                        result_label = "Your computer seems to be too fast to run this test with a target number of", cycles, """cycles. Maybe multiply the value of the variable "cycles" with ten?"""
+                        return_value = 1
+                    finally:
+                        result = Label(gui, result_label)  # Define the label with the test result. 
+                        result.pack()
+                        close_button = Button(gui, "Quit", command=gui.destroy) # Define the button to quit the GUI. 
+                        close_button.pack() # Pack the close_button into the main window. 
+                        return return_value # Return a zero to signal the return value handler that everything went right if everything went right, if there was a division by zero, return 1 for "DivisioByZeroError".
 
 def load_gui(force_to_run = False): # This function is for loading the GUI of the program but I think I will merge this function with the is_graphical=True part of run_test() later.
     gui = Tk()  # Define a window with the ID "gui".
@@ -43,11 +70,13 @@ def load_gui(force_to_run = False): # This function is for loading the GUI of th
         gui.destroy()   # Destroy (close) the window with the ID "gui" after "OK" has been clicked in the messagebox that's defined above. 
         run_test(False) # Run the test itself in command-line mode. 
     if force_to_run == True:
+#        gui = Tk()
+#        gui.title("PyPerfScore GUI")
         print("Ok, the GUI will be loaded if possible. Note that this will probably cause a traceback.\nThe creator of this code is not responsible for any damage caused by this part of the code itself or its use!") # Warn the user in the command-line that errors could occur here. If the window doesn't show up or somehow freezes before displaying the warning graphically the user is warned. 
         messagebox.showwarning("Welcome!", """The GUI isn't fully implemented just yet!\nAnyway, since you run this program with "--full-gui" it will try to load the full GUI. Note that this will probably cause a traceback.\nThe creator of this code is not responsible for any damage caused by this part of the code itself or its use!""")  # Show the same warning, but in GUI mode.
-        #graphical code goes here
+        run_test(True)  # Finally, we have some productive GUI code instead of just windows popping up and disappearing again, look above to the definition of this function! 
         messagebox.showinfo("Done!", """Perfect, the part of the code that is still in development seems to not have crashed anything! If you like to submit issues that occurred, please go to "https://github.com/Stehlampe2020/PyPerfScore/issues" to report them.\n\n*End of Code*""")  # Congratulations! If you see that message the program didn't crash! 
-        gui.destroy()   # Destroy (close) the window with the ID "gui" after "OK" has been clicked in the messagebox that's defined above. 
+#        gui.destroy()   # Destroy (close) the window with the ID "gui" after "OK" has been clicked in the messagebox that's defined above. 
         print("""Perfect, the part of the code that is still in development seems to not have crashed anything! If you would like to submit issues that occurred, please go to "https://github.com/Stehlampe2020/PyPerfScore/issues" to report them.\n*End of code*""")   # Congratulating also in command-line mode if (for some reason) the graphical message didn't get displayed. 
         return 0    # Return a zero to signal the return value handler that everything went right (as far as we can know). 
     
@@ -85,7 +114,7 @@ def ask_for_args():
             except:
                 print("Something failed while the GUI was loading or active!")
             finally:
-                vars = globals()
+                vars = globals()    # This line and the following four lines of code are copied from the StackExchange network.
                 vars.update(locals())
                 readline.set_completer(rlcompleter.Completer(vars).complete)
                 readline.parse_and_bind("tab: complete")
@@ -97,10 +126,10 @@ def ask_for_args():
                 load_gui(True)
             except KeyboardInterrupt:
                 print("\rKeyboardInterrupt")
-            except:
-                print("Something failed while the GUI was loading or active!")
+#            except:
+#                print("Something failed while the GUI was loading or active!")
             finally:
-                vars = globals()
+                vars = globals()    # This line and the following four lines of code are copied from the StackExchange network.
                 vars.update(locals())
                 readline.set_completer(rlcompleter.Completer(vars).complete)
                 readline.parse_and_bind("tab: complete")
@@ -115,7 +144,7 @@ def ask_for_args():
             except:
                 print("Something failed while the test was loading or running!")
             finally:
-                vars = globals()
+                vars = globals()    # This line and the following four lines of code are copied from the StackExchange network.
                 vars.update(locals())
                 readline.set_completer(rlcompleter.Completer(vars).complete)
                 readline.parse_and_bind("tab: complete")
@@ -123,7 +152,7 @@ def ask_for_args():
             return 0    # This time we didn't fail. Signaling that to the return code handler. 
         else:
             print("""Incorrect argument used!\nThe only arguments that will be accepted are "--cmdline", "--gui", "--full-gui" and "--debug".\n "--cmdline" will run this program in command-line mode, "--gui" will only load the parts of the GUI that are fully implemented by now and "--full-gui" will try to run the full GUI even though some parts may cause crashes. "--debug" enters an interactive shell if any error occurrs or the program finishes (a bit like the "-i" option for the "python3"-command).""")
-            vars = globals()
+            vars = globals()    # This line and the following four lines of code are copied from the StackExchange network.
             vars.update(locals())
             readline.set_completer(rlcompleter.Completer(vars).complete)
             readline.parse_and_bind("tab: complete")
