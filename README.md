@@ -1,5 +1,5 @@
 # What is "PyPerfScore" and how does it work? 
-This is a little Python program that counts up from zero to 1,000,000 (that's the default value for `max_runs`) as fast as the CPU allows. The program takes a timestamp before and after the `while` loop runs. When it finishes counting from zero to 1,000,000 the program subtracts the first timestamp from the second one to get the time the loop actually took to run through. Then it divides the amount of runs through the loop (the value of `runs_max`) with the time it needed to complete.   
+This is a little Python program that counts up from zero to 1,000,000 (that's the default value for `cycles`) as fast as the CPU allows. The program takes a timestamp before and after the `while` loop runs. When it finishes counting from zero to 1,000,000 the program subtracts the first timestamp from the second one to get the time the loop actually took to run through. Then it divides the amount of runs through the loop (the value of `cycles`) with the time it needed to complete.   
 Before it exits it prints the resulting score to the screen, rounding the time it took to complete to three decimal points and the score to zero decimal points using the `round()` function so the user doesn't need to understand the big mass of numbers and just gets accurate but still easily understandable numbers to work with.   
 And the rounding has another benefit: it makes the measuring insccuracy completely unimportant. 
 
@@ -40,8 +40,8 @@ OS: Linux Mint 20.3 Cinnamon
 |`~$ pyperfscore`|This will run the program in default mode, which is (for now) the command-line mode.|
 |`~$ pyperfscore --cmdline`|Explicitly run the program in command-line mode.|
 |`~$ pyperfscore --gui`|Explicitly run the program in GUI mode. *Note: This will run the program in command-line mode and just show a little warning in the GUI until the GUI is implemented usably and free of bugs.*|
-|`~$ pyperfscore --full-gui`|Force-load the full GUI (as far as it's implemented) and not run the test in command-line mode at all. *Note: this option will later be removed, as soon as the GUI is fully bug-free.*|
+|`~$ pyperfscore --full-gui`|Force-load the full GUI (as far as it's implemented) and not run the test in command-line mode at all. *Note: this option will later be disabled, as soon as the GUI is fully bug-free.*|
 |||
 |`~$ pyperfscore --cmdline --debug`|Explicitly run the program in command-line mode. Go into an interactive shell on EOF or errors.|
 |`~$ pyperfscore --gui --debug`|Explicitly run the program in GUI mode. Go into an interactive shell on EOF or errors.|
-|`~$ pyperfscore --full-gui --debug`|Force-load the full GUI (as far as it's implemented) and not run the test in command-line mode at all. Go into an interactive shell on EOF or errors. *Note: `--full-gui` will later be removed, as soon as the GUI is fully bug-free.*|
+|`~$ pyperfscore --full-gui --debug`|Force-load the full GUI (as far as it's implemented) and not run the test in command-line mode at all. Go into an interactive shell on EOF or errors. *Note: `--full-gui` will later be disabled, as soon as the GUI is fully bug-free.*|
