@@ -1,189 +1,253 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+# -*- encoding: utf-8 -*-
 
-import sys
-import time as t
-import code
-import readline
-import rlcompleter
+if __name__ != "__main__":
+    print("Please don't import PyPerfScore into other programs!")
+    completion_status = "cancelled"
+    exit("{}\n{}".format(completion_status, None))
 
-gui = None
-
-global version
-version = "0.2.4-alpha"
-print("You are now running version " + version + """ of PyPerfScore. To check for newer versions, please check out "https://github.com/Stehlampe2020/PyPerfScore".""")
-
-def run_test(is_graphical = False):
-    cycles = 1000000    # This is the number that this program counts up to. Chage it if you want, it will only change how long the test takes and how accurate the score is (higher number -> test takes longer -> score is more accurate). 
-    number = 0  # This is the number the program counts up from. Do not change this number. 
-    time_at_start = t.time()    # Take a timestamp.
-    if is_graphical == False:
-        while number <= cycles:
-                if number < cycles:
-                        print(number, "/", cycles, end="\r")    # Print the number the program has by now to the terminal. Also show the target number for comparison. Set the line end to "\r" to move the cursor back to the start of the line, so the line is automatically overwritten when the new number is printed in the next cycle of the test.
-                        number += 1 # Increment the number by one, this is what actually counts up. 
-                elif number == cycles:
-                        print(number, "=", cycles, end="\r")    # Print the final number, now equaling the target number. Set the line end to "\r" to move the cursor back to the start of the line, so the line is automatically overwritten when the conclusion is printed to the terminal later on.
-                        time_at_finish = t.time()   # Take a timestamp. 
-                        time_to_complete = time_at_finish - time_at_start   # Subtract the first timestamp off the second one to get the time in seconds the counting took. 
-                        print("Your computer needed " + str(round(time_to_complete, 3)) + " seconds to count from zero to " + str(cycles) + " as fast as it could.")    # Print a conclusion to the terminal, overwriting the line where the testing happened. 
-                        try:
-                            score = cycles / time_to_complete   # Compute the score: divide the time the counting took by the number of cycles that the loop was run. 
-                        except DivisionByZero:
-                            print("Your computer seems to be too fast to run this test with a target number of", cycles, """cycles. Maybe multiply the value of the variable "cycles" with ten?""")
-                            return 1    # Return a 1 as a return code for this function. Return code 1 means "DivisionByZeroError".
-                        print("So the score is " + str(round(score)) + ".") # Print the score in a nice form and rounded to a whole number to the terminal.
-                        return 0    # Return a zero to signal the return value handler that everything went right.
-    elif is_graphical == True:
-        ver_label_text = "PyPerfScore " + str(version)  # Define the text for the version note. 
-        ver_label = Label(gui, ver_label_text)  # Define the version note itself. 
-        ver_label.pack()    # Put the ver_label into the main window. 
-        while number <= cycles:
-            gui = Tk()
-            gui.title("PyPerfScore")
-            if number < cycles:
-                    gui.title(number, "/", cycles, "- PyPerfscore GUI")    # Print the number the program has by now to the title bar of the main window. Also show the target number for comparison. 
-                    number += 1 # Increment the number by one, this is what actually counts up. 
-            elif number == cycles:
-                    gui.title(number, "=", cycles, "- PyPerfscore GUI")    # Print the final number, now equaling the target number to the title bar of the main window. 
-                    time_at_finish = t.time()   # Take a timestamp. 
-                    time_to_complete = time_at_finish - time_at_start   # Subtract the first timestamp off the second one to get the time in seconds the counting took. 
-                    gui.title("Test completed! - PyPerfscore GUI")
-                    result_label = "Your computer needed " + str(round(time_to_complete, 3)) + " seconds to count from zero to " + str(cycles) + " as fast as it could."    # Put the result into a variable. 
-                    try:
-                        score = cycles / time_to_complete   # Compute the score: divide the time the counting took by the number of cycles that the loop was run. 
-                    except DivisionByZero:
-                        result_label = "Your computer seems to be too fast to run this test with a target number of", cycles, """cycles. Maybe multiply the value of the variable "cycles" with ten?"""
-                        return_value = 1
-                    finally:
-                        result = Label(gui, result_label)  # Define the label with the test result. 
-                        result.pack()
-                        close_button = Button(gui, "Quit", command=gui.destroy) # Define the button to quit the GUI. 
-                        close_button.pack() # Pack the close_button into the main window. 
-                        return return_value # Return a zero to signal the return value handler that everything went right if everything went right, if there was a division by zero, return 1 for "DivisioByZeroError".
-
-def load_gui(force_to_run = False): # This function is for loading the GUI of the program but I think I will merge this function with the is_graphical=True part of run_test() later.
-    gui = Tk()  # Define a window with the ID "gui".
-    gui.title("PyPerfScore GUI")    # Give the window with the ID "gui" a title. 
-    if force_to_run == False:
-        messagebox.showinfo("Welcome!", """The GUI isn't implemented just yet, please check for new versions that have this feature implemented!\nClicking "OK" below will run the test anyway in command-line mode.""")
-        print("The GUI isn't fully implemented yet, anyway, the test will be performed in command-line mode below:")    # Print a shortened version of the same message to the terminal for the case that the window doesn't show up or someone wants to figure out what happened just based on the terminal output.
-        gui.destroy()   # Destroy (close) the window with the ID "gui" after "OK" has been clicked in the messagebox that's defined above. 
-        run_test(False) # Run the test itself in command-line mode. 
-    if force_to_run == True:
-#        gui = Tk()
-#        gui.title("PyPerfScore GUI")
-        print("Ok, the GUI will be loaded if possible. Note that this will probably cause a traceback.\nThe creator of this code is not responsible for any damage caused by this part of the code itself or its use!") # Warn the user in the command-line that errors could occur here. If the window doesn't show up or somehow freezes before displaying the warning graphically the user is warned. 
-        messagebox.showwarning("Welcome!", """The GUI isn't fully implemented just yet!\nAnyway, since you run this program with "--full-gui" it will try to load the full GUI. Note that this will probably cause a traceback.\nThe creator of this code is not responsible for any damage caused by this part of the code itself or its use!""")  # Show the same warning, but in GUI mode.
-        run_test(True)  # Finally, we have some productive GUI code instead of just windows popping up and disappearing again, look above to the definition of this function! 
-        messagebox.showinfo("Done!", """Perfect, the part of the code that is still in development seems to not have crashed anything! If you like to submit issues that occurred, please go to "https://github.com/Stehlampe2020/PyPerfScore/issues" to report them.\n\n*End of Code*""")  # Congratulations! If you see that message the program didn't crash! 
-#        gui.destroy()   # Destroy (close) the window with the ID "gui" after "OK" has been clicked in the messagebox that's defined above. 
-        print("""Perfect, the part of the code that is still in development seems to not have crashed anything! If you would like to submit issues that occurred, please go to "https://github.com/Stehlampe2020/PyPerfScore/issues" to report them.\n*End of code*""")   # Congratulating also in command-line mode if (for some reason) the graphical message didn't get displayed. 
-        return 0    # Return a zero to signal the return value handler that everything went right (as far as we can know). 
-    
-def ask_for_args():
-    args = sys.argv
-    if len(args) == 2:  # If two arguments are given, do one of the following things: 
-        # The program name is also counted as an argument when using sys.argv to ask for the command-line arguments. 
-        # Because computers are counting from zero up and not from one, we ask for argument 1 (which is the second argument in sys.argv) to get the first argument AFTER the program name. If we asked for the first argument we would get the program name but that doesn't interest us at all.
-        if args[1] == "--gui":  # If the second argument is --gui we load the GUI:
-            print("Loading GUI...")
-            load_gui()
-            return 0    # This time we didn't fail.
-        elif args[1] == "--full-gui":   # If the second argument is --full-gui we load the GUI with the input value True for force_to_run to load even the unstable parts of the GUI. This option will be commented out as soon as I finish writing the GUI and the program gets into the release phase.
-            print("Loading GUI...")
-            load_gui(True)
-            return 0    # This time we didn't fail.
-        elif args[1] == "--cmdline":    # If the second argument is --cmdline we simply run the test in command-line mode. This option is useless for now but will be useful when I switch the default value for is_graphical  for run_test() from False to True. 
-            print("Running in command-line mode...")
-            run_test(False)
-            return 0    # This time we didn't fail. Signaling that to the return code handler. 
-        elif args[1] == "--debug":
-            print("To use \"--debug\" you have to use it in combination with one of the other arguments! (\"--cmdline\", \"--gui\" or \"--full-gui\", put one of these before \"--debug\".)")
-            return 2    # This time we failed. Returning a 2 for "wrong argument".
-        else:
-            print("""Incorrect argument used!\nThe only arguments that will be accepted are "--cmdline", "--gui", "--full-gui" and "--debug".\n "--cmdline" will run this program in command-line mode, "--gui" will only load the parts of the GUI that are fully implemented by now and "--full-gui" will try to run the full GUI even though some parts may cause crashes. "--debug" enters an interactive shell if any error occurrs or the program finishes (a bit like the "-i" option for the "python3"-command).""")
-            exit()
-            return 2    # This time fe failed. Returning a 2 for "wrong argument".
-    elif len(args) == 3:
-        if args[1] == "--gui" and args[-1] == "--debug":  # If the first (from the users perspective) argument is --gui and the last argument is --debug we load the GUI:
-            print("Loading GUI...")
-            try:
-                load_gui()
-            except KeyboardInterrupt:
-                print("\rKeyboardInterrupt")
-            except:
-                print("Something failed while the GUI was loading or active!")
-            finally:
-                vars = globals()    # This line and the following four lines of code are copied from the StackExchange network.
-                vars.update(locals())
-                readline.set_completer(rlcompleter.Completer(vars).complete)
-                readline.parse_and_bind("tab: complete")
-                code.InteractiveConsole(vars).interact()
-            return 0    # This time we didn't fail.
-        elif args[1] == "--full-gui" and args[-1] == "--debug":   # If the first (from the users perspective) argument is --full-gui we load the GUI with the input value True for force_to_run to load even the unstable parts of the GUI. This option will be commented out as soon as I finish writing the GUI and the program gets into the release phase.
-            print("Loading GUI...")
-            try:
-                load_gui(True)
-            except KeyboardInterrupt:
-                print("\rKeyboardInterrupt")
-#            except:
-#                print("Something failed while the GUI was loading or active!")
-            finally:
-                vars = globals()    # This line and the following four lines of code are copied from the StackExchange network.
-                vars.update(locals())
-                readline.set_completer(rlcompleter.Completer(vars).complete)
-                readline.parse_and_bind("tab: complete")
-                code.InteractiveConsole(vars).interact()
-            return 0    # This time we didn't fail.
-        elif args[1] == "--cmdline" and args[-1] == "--debug":    # If the first (from the users perspective) argument is --cmdline we simply run the test in command-line mode. This option is useless for now but will be useful when I switch the default value for is_graphical  for run_test() from False to True. 
-            print("Running in command-line mode...")
-            try:
-                run_test(False)
-            except KeyboardInterrupt:
-                print("\rKeyboardInterrupt")
-            except:
-                print("Something failed while the test was loading or running!")
-            finally:
-                vars = globals()    # This line and the following four lines of code are copied from the StackExchange network.
-                vars.update(locals())
-                readline.set_completer(rlcompleter.Completer(vars).complete)
-                readline.parse_and_bind("tab: complete")
-                code.InteractiveConsole(vars).interact()
-            return 0    # This time we didn't fail. Signaling that to the return code handler. 
-        else:
-            print("""Incorrect argument used!\nThe only arguments that will be accepted are "--cmdline", "--gui", "--full-gui" and "--debug".\n "--cmdline" will run this program in command-line mode, "--gui" will only load the parts of the GUI that are fully implemented by now and "--full-gui" will try to run the full GUI even though some parts may cause crashes. "--debug" enters an interactive shell if any error occurrs or the program finishes (a bit like the "-i" option for the "python3"-command).""")
-            vars = globals()    # This line and the following four lines of code are copied from the StackExchange network.
-            vars.update(locals())
-            readline.set_completer(rlcompleter.Completer(vars).complete)
-            readline.parse_and_bind("tab: complete")
-            code.InteractiveConsole(vars).interact()
-            return 2    # This time fe failed. Returning a 2 for "wrong argument".
-    elif len(args) >= 4:    # Warn the user if too many arguments were used and the quit the program. 
-        print("Too many arguments!\n(This program only takes up to two of them...)")
-        exit()
-        return 3    # This time we failed. Returning a 3 for "too many arguments were used".
-    elif len(args) == 1:    # If there's only one argument given (the name of the program, like described in line 51 of the source code) we warn the user that no arguments (in the way we think of them when entering them) were detected and run the test in default mode. For now, that's command-line mode but that'll change later.
-        print("""No command-line options were detected, running in default mode.\nIf you intended to run this program in graphical mode, press [Ctrl] + [C] now to cancel and re-run this program with the argument "--gui".""")
-        run_test()
-        return 0    # This time we didn't fail. We were just running in a pre-defined mode instead of a user-specified one.
-    else:   # If somehow less than zero arguments (in the way we think of them when entering them) were detected we warn the user and ask to report the issue.
-        print("An unknown error occurred while checking for command-line options, please report this behaviour and the conditions under which this error occurred!")
-        return 4    # This time we failed. Returning a 4 for "unknown error while checking for command-line arguments".
+# ——————————————— Initialization begin ———————————————
+version = "0.3.1"
+release_type = "pre-alpha"
+update_nickname = "Complete recode update"
 
 try:
-    import tkinter  # Try to import tkinter
-except ImportError: # If importing tkinter fails: 
-    print("""Importing module "tkinter" failed, you will only be able to run this program in command-line mode!""") # Print a little notify that tkinter could not be imported and the test will run in command-line mode. 
-    try:
-        run_test(False) # directly run the test in command-line mode without even checking for arguments because they are (at least for now) just to tell the program to run in graphical mode, which is impossible without tkinter. 
-    except KeyboardInterrupt:
-        print("\rA KeyboardInterrupt has been raised, exiting...")  # Notify the user in command-line that a KeyboardInterrupt has been raised so it's clear what made the program stop. 
-        pass
+    with open("lang/preferred.ppslng") as langfile:
+        strings = eval(langfile.read())
+        if type(strings) != dict:
+            raise SyntaxError("Tried to import a faulty language file into PyPerfScore!")
+        if strings["ppsver"] != version:
+            print(strings["ppsver_warning"].format(strings["ppsver"], version))
+        language_string = strings["language_string"]
+        lang = strings["language"]
+except Exception as e:
+    print("Error: could not import language! (Error message: {error_message})\nExiting PyPerfScore...".format(error_message=e))
+    exit("failed_to_import_language")
 else:
-    try:     #If importing of tkinter doesn't fail, run the program in an own try-except-construct to easily handle KeyboardInterrupts: 
-        from tkinter import *
-        from tkinter import messagebox
-        ask_for_args()  # Now, let's check for command-line arguments and run the program! (Running the test is done by ask_for_args().)
-    except KeyboardInterrupt:   # If a KeyboardInterrupt occurrs: 
-        print("\rA KeyboardInterrupt has been raised, exiting...")  # Notify the user in command-line that a KeyboardInterrupt has been raised so it's clear what made the program stop. 
-        pass
+    print(strings[0].format(language_string, lang))
+
+cycles = 100000000 # This number is the number the program counts up to. If you increase this value the score is more accurate, if you decrease this value the score is less accurate.
+score = None # This definition is only for avoiding tracebacks with the last line of code. (which returns the completion_status and the score to the interpreter/os)
+try:
+    import os
+    import sys
+    import time
+    import traceback
+    
+    args = sys.argv.copy()
+    
+    core_count = len(os.sched_getaffinity(0))
+    
+    def argument(argument_to_search_for):
+        return argument_to_search_for in args
+
+    def exists(var):
+        if var != "":
+            try:
+                eval(var)
+                return True
+            except NameError:
+                return False
+        elif var == "":
+            return False
+
+    def build_version_string():
+        if update_nickname:
+            version_string = "v{}-{} - {}".format(version, release_type, update_nickname)
+        else:
+            version_string = "v{}-{}".format(version, release_type)
+        return strings[1].format(version_string)
+    
+    print(build_version_string())
+
+    class debug():
+        """ String-commented out because exec(<expression>) (in difference to eval(<expression>)) can interpret keywords:
+        # Definition of the keyword replacements for the minishell:
+        # <var1> in <var2>
+        def contains(to_search_through, to_search_for):
+            return to_search_for in to_search_through
+        
+        # raise <exception>
+        def raise_exception(exception = Exception):
+            raise exception
+        
+        # <value_1> == <value_2>
+        def is_equal(value_1, value_2):
+            return value_1 == value_2
+        
+        # <value_1> != <value_2>
+        def is_unequal(value_1, value_2):
+            return value_1 != value_2
+        """
+        
+        # Traceback functions:
+        def last_traceback():
+            return traceback.format_exc()
+        
+        def print_last_traceback():
+            print(debug.last_traceback())
+        
+        # Set the number of cycles the test loop should take:
+        def set_cycles(number = 10000000): # The value for number set here is just the default and only gets applied when calling debug.set_cycles() without a number.
+            global cycles
+            cycles = number
+            return cycles
+        
+        # The debug minishell:
+        def minishell(fail_status = "", advanced_minishell = False):
+            if not advanced_minishell in (True, False):
+                print(strings[3][0].format(advanced_minishell, type(advanced_minishell)))
+                return
+            def help():
+                help_text_raw = strings[3][1]
+                if advanced_minishell:
+                    print(help_text_raw.format(strings[3][2], strings[3][3]))
+                elif not advanced_minishell:
+                    return help_text_raw.format("", strings[3][4])
+            if fail_status == "failed":
+                print(strings[3][5])
+            elif fail_status == "cancelled":
+                print(strings[3][6])
+            elif fail_status == "finished":
+                print(strings[3][7])
+            elif fail_status == "switching_shells":
+                print(strings[3][8])
+            elif fail_status == "":
+                print(strings[3][9])
+            else:
+                print(strings[3][10].format(fail_status, type(fail_status)))
+            
+            print(strings[3][11])
+            while True:
+                pyperfscore_debug_minishell_user_input = ""
+                try:
+                    if advanced_minishell:
+                        pyperfscore_debug_minishell_user_input = input("PyPerfScore (ams)> ") # I use this long name for the input to avoid colliding with the user's inputs.
+                    elif not advanced_minishell:
+                        pyperfscore_debug_minishell_user_input = input("PyPerfScore> ") # I use this long name for the input to avoid colliding with the user's inputs.
+                    if pyperfscore_debug_minishell_user_input not in ("", "exit()"): # If the entered command is not handled by debug.minishell():
+                        if advanced_minishell:
+                            exec(pyperfscore_debug_minishell_user_input) # I don't use the print() function here because exec(<expression>) function doesn't seem to return anything.
+                        elif not advanced_minishell:
+                            print(eval(pyperfscore_debug_minishell_user_input))
+                    elif pyperfscore_debug_minishell_user_input == "exit()":
+                        print(strings[3][12])
+                        return
+                except KeyboardInterrupt:
+                    print(strings[3][13].format("KeyboardInterrupt", strings[3][12]))
+                    return
+                except SystemExit:
+                    print(strings[3][14].format("SystemExit", strings[3][12]))
+                    return
+                except Exception:
+                    if pyperfscore_debug_minishell_user_input != "":
+                        if pyperfscore_debug_minishell_user_input != "exit()":
+                            debug.print_last_traceback()
+                        elif pyperfscore_debug_minishell_user_input == "exit()":
+                            print(strings[3][12])
+                            return
+                    elif pyperfscore_debug_minishell_user_input == "":
+                        print("\n{}".format(strings[3][12]))
+                        return
+
+    class multithreading():
+        corecount = len(os.sched_getaffinity(0))
+        def run(corecount):
+            print(strings[4][0])
+
+    # ——————————————— Initialization end ———————————————
+
+    if len(args) == 1:
+        print(strings[5][0])
+    elif len(args) == 2 and argument("--debug"):
+        print(strings[5][1])
+    
+    if argument("--gui"):
+        import PyPerfScoreGUI as gui
+    """
+    New run plan:
+    if argument("--gui") or argument("gui")
+        try:
+            import gui
+            main_window = gui.PyPerfScoreGUI(full = argument("--gui-alpha-features"))
+            run_test(main_window)
+        except ModuleNotFoundError:
+            print("Das GUI-Modul wurde nicht gefunden!")
+    else:
+        run_test(graphical=False)
+    """
+    
+    def test_nogui(core_count = 1):
+        # cycles = 10000000 # This is the default value. The actual definition of the value is at the top of this file for debug purposes.
+        def generate_load():
+            cycles_passed = 0
+            test_percentage = 0
+            print("{}...   ".format(strings[6][0]), end="\r")
+            while cycles_passed <= cycles:
+                test_percentage_before = test_percentage
+                test_percentage = round((cycles_passed / 100) / (cycles / 100) * 100, 1)
+                if test_percentage != test_percentage_before:
+                    print("{}: {}%   ".format(strings[6][0], test_percentage), end="\r")
+                cycles_passed += 1
+        time_at_start = time.time() # Take a timestamp.
+        if core_count == 1:
+            generate_load()
+#         elif core_count <= 2:
+#             # Two core test.
+#         elif core_count <= 4:
+#             # Four core test.
+#         elif core_count <= 8:
+#             # Eight core test.
+#         elif core_count <= 16:
+#             # Sixteen core test.
+        time_to_complete = time.time() - time_at_start # Subtract the first timestamp off the time now to get the time in seconds the counting took. 
+        print(strings[6][1].format(round(time_to_complete, 3), cycles))
+        try:
+            global score
+            score = cycles / time_to_complete # Calculate the score: divide the time the counting took by the number of cycles that the loop was run. 
+        except DivisionByZero:
+            print(strings[8][0].format(cycles))
+        print(strings[6][2].format(round(score))) # Print the score in a nice form and rounded to a whole number to the terminal.
+        return score
+    
+    def run_test(is_graphical = argument("--gui"), force_gui = argument("--gui-alpha-features")):
+        if is_graphical:
+            print(strings[7][0])
+            gui_main_window = gui.generate_gui()
+        elif not is_graphical:
+            if not argument("--singlecore") and not argument("--multicore"):
+                print(strings[4][1])
+                test_nogui()
+            elif argument("--singlecore"):
+                test_nogui(1)
+            elif argument("--multicore"):
+                print(strings[4][2])
+                return test_nogui() # Give test_nogui() as argument the number of available cores.
+    
+    run_test()
+    
+    completion_status = "finished" # This definition will not be reached in case of a Traceback above, so here's no need for an if statement.
+except ImportError:
+    print(strings[8][1])
+    debug.print_last_traceback()
+    completion_status = "failed"
+except KeyboardInterrupt:
+    print("\r{}".format(strings[8][2]))
+    completion_status = "cancelled"
+except SystemExit:
+    print(strings[8][3])
+    debug.print_last_traceback()
+    if argument("--debug"):
+        print("\n{}".format(strings[3][14]))
+    completion_status = "cancelled"
+    sys.exit()
+except:
+    print(strings[8][4])
+    debug.print_last_traceback()
+    completion_status = "failed"
+finally:
+    if argument("--debug"):
+        debug.minishell(completion_status)
+    print(strings[9])
+    exit("{}\n{}".format(completion_status, score))
+
