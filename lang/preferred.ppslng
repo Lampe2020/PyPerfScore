@@ -1,0 +1,75 @@
+# This is the PyPerfScore language file for English (en).
+# If you don't understand the syntax, please don't change anything here!
+# 
+# This file was made by Christian Lampe <kontakt@lampe2020.de>
+{
+    "ppsver": "0.3.1",
+    "ppsver_warning": "The version of PyPerfScore which the imported language file is made for ({}) doesn't match the version you're using ({}). If PyPerfScore crashes unexpectedly or displays some nonsense, this may be the cause.",
+    "language": "en",
+    "language_string": "English",
+    0: """Language "{}" ({}) successfully imported!""",
+    1: """You are using PyPerfScore {}. To check for newer versions, please check out "https://github.com/Stehlampe2020/PyPerfScore".""",
+    2: NotImplemented, # This "empty" message exists because of an implementation mistake and will later be removed.
+    3: { # For the debug() class:
+        0: "Minishell called with invalid argument for advanced_minishell: {} ({})",
+        1: """
+    PyPerfScore {}minishell help():
+    This minishell is only for debug purposes.
+    It lacks a command history (I don't plan to add one) and the ability to interpret multi-line expressions.
+    The latter should be made unnecesary by the function exists(<string>), which returns
+    → True if an object with the name <string> exists and
+    → False if no object with the name <string> exists.
+    {}""",
+        2: "advanced ",
+        3: """
+    The advanced minishell has the ability to interpret keywords but doesn't automatically print the return values (use print() for that).
+    """,
+        4: """
+    Keywords don't function in this shell, use the advanced debug shell for that.
+    The advanced debug shell can be started using `debug.minishell("switching_shells", True)`.
+    """,
+        5: "Hmmm... Something seems to have failed (see the messages above for more info). Luckily PyPerfScore managed to go into the debug shell after the fail:",
+        6: "PyPerfScore has been interrupted (e.g. by a KeyboardInterrupt). Here is a simple interactive shell to inspect everything:",
+        7: "PyPerfScore seems to have finished. Here is a simple interactive shell to inspect everything:",
+        8: "\nYou can return to the previous shell using exit().\nHere's the new interactive debug shell:",
+        9: "No fail_status given to debug.minishell()!\n\nHowever, here's the interactive debug shell:",
+        10: "Invalid fail_status given to debug.minishell():\n{}\n{}\n\nHowever, here's the interactive debug shell:",
+        11: """Multi-line expressions (like try...except...finally) and command history will not work in this minishell.
+Type "exit()" to exit the debug shell, type "help()" for more information.""",
+        12: "Exiting debug shell...",
+        13: "\nA {} has been raised.\n{}",
+        14: "The debug shell will open but be exited immediately."
+    },
+    4: { # multiprocessing-specific text:
+        0: "multithreading: Not implemented yet!",
+        1: "Because you haven't given an argument specifying if PyPerfScore should run in single or multicore mode the default will be loaded.",
+        2: "The multicore mode doesn't exist yet. Going into singlecore mode instead..."
+    },
+    5: { # For argument handling:
+        0: "No arguments detected, running in default mode...",
+        1: "You haven't given any arguments except the --debug argument, running in default mode with debug minishell..."
+    },
+    6: { # For the test itself:
+        0: "Running test",
+        1: "Your computer needed {} seconds to count from zero to {} as fast as it could.",
+        2: "So the score is {}."
+    },
+    7: { # The GUI's text:
+        0: "Starting GUI...",
+        1: {
+            0: "Warning: tkinter could not be imported! Make sure to install it properly or otherwise PyPerfScore will only run in command line mode (pyperfscore --cmdline).",
+            1: "tkinter missing!",
+        },
+        2: "The GUI is not implemented yet!",
+        3: "PyPerfScoreGUI isn't implemented!",
+        4: "Notice: The GUI isn't implemented by now. I will work on that when the command line mode (pyperfscore --cmdline) is properly implemented."
+    },
+    8: { # For the error handling:
+        0: """Your computer seems to be too fast to run this test with a target number of {} cycles. Maybe raise the value of the variable "cycles"?""",
+        1: "Some modules could not be imported, the following text is the technical mumbo jumbo associated with the error:",
+        2: "A KeyboardInterrupt has been raised.",
+        3: "An immediate exit of PyPerfScore has been requested (SystemExit has been raised), the following text is the technical mumbo jumbo associated with the exception:",
+        4: "An unexpected error occurred, the following text is the technical mumbo jumbo associated with the error:"
+    },
+    9: "Exiting PyPerfScore..."
+}
