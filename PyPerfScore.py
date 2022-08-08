@@ -32,14 +32,17 @@ else:
     print(strings[0].format(language_string, lang))
 
 cycles = 100000000 # This number is the number the program counts up to. If you increase this value the score is more accurate, if you decrease this value the score is less accurate.
+
+completion_status = None # This definition is only for avoiding tracebacks with the last line of code. (which returns the completion_status and the score to the interpreter/os)
 score = None # This definition is only for avoiding tracebacks with the last line of code. (which returns the completion_status and the score to the interpreter/os)
+
 try:
     import os
     import sys
     import time
     import traceback
     
-    args = sys.argv.copy()
+    args = sys.argv # This is just there to make the name shorter.
     
     core_count = len(os.sched_getaffinity(0))
     
@@ -67,6 +70,7 @@ try:
     
     if argument("--update"):
         completion_status = "update"
+        args.remove("--update")
         import ppsupdater
         if argument("--exit"):
             exit()
