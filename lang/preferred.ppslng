@@ -3,13 +3,13 @@
 # 
 # This file was made by Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.1",
+    "ppsver": "0.3.2",
     "ppsver_warning": "The version of PyPerfScore which the imported language file is made for ({}) doesn't match the version you're using ({}). If PyPerfScore crashes unexpectedly or displays some nonsense, this may be the cause.",
     "language": "en",
     "language_string": "English",
     0: """Language "{}" ({}) successfully imported!""",
     1: """You are using PyPerfScore {}. To check for newer versions, please check out "https://github.com/Stehlampe2020/PyPerfScore".""",
-    2: NotImplemented, # This "empty" message exists because of an implementation mistake and will later be removed.
+    2: "Could not get own version! Setting to 0.0.0...",
     3: { # For the debug() class:
         0: "Minishell called with invalid argument for advanced_minishell: {} ({})",
         1: """
@@ -68,8 +68,20 @@ Type "exit()" to exit the debug shell, type "help()" for more information.""",
         0: """Your computer seems to be too fast to run this test with a target number of {} cycles. Maybe raise the value of the variable "cycles"?""",
         1: "Some modules could not be imported, the following text is the technical mumbo jumbo associated with the error:",
         2: "A KeyboardInterrupt has been raised.",
-        3: "An immediate exit of PyPerfScore has been requested (SystemExit has been raised), the following text is the technical mumbo jumbo associated with the exception:",
-        4: "An unexpected error occurred, the following text is the technical mumbo jumbo associated with the error:"
+        3: "An immediate exit of PyPerfScore has been requested (SystemExit has been raised) with the following error message: {}",
+        4: """An unexpected error ({}) occurred with the following message: "{}"!"""
     },
-    9: "Exiting PyPerfScore..."
+    9: "Exiting PyPerfScore...",
+    10: { # For the updater:
+        "dl_types": {
+            0: "checking for a new version",
+            1: "downloading the newest update"
+        },
+        "conn_error": "A network error occurred while {}. Error message: {}",
+        0: "You need to restart PyPerfScore after the update!",
+        1: "Update available online! ({ver_old} → {ver_new}) Installing...",
+        2: "You seem to use the newest version!",
+        3: "Downloading file: {}"
+    },
+    11: "Don't try to create a `debug` object, this class exists just to group the debug functions!"
 }
