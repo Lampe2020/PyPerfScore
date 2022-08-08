@@ -3,7 +3,7 @@
 # 
 # Diese Datei wurde erstellt von Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.2",
+    "ppsver": "0.3.3",
     "ppsver_warning": "Die Version von PyPerfScore, für die die importierte Sprachdatei gemacht ist ({}), stimmt nicht mit der von Ihnen genutzten Programmversion überein ({}). Wenn PyPerfScore unerwartet abstürzt oder irgendeinen Unsinn anzeigt, könnte dies das Problem sein.",
     "language": "de_DE",
     "language_string": "Deutsch - Deutschland",
@@ -47,7 +47,8 @@ Geben Sie "exit()" ein, um die Debug-Eingabeaufforderung zu verlassen, "help()" 
     },
     5: { # Für die Argumentauslesung:
         0: "Keine Argumente erkannt, wird im Standardmodus ausgeführt...",
-        1: "Sie haben keine Argumente außer --debug angegeben, wird im Standardmodus mit anschließender Eingabeaufforderung ausgeführt..."
+        1: "Sie haben keine Argumente außer --debug angegeben, wird im Standardmodus mit anschließender Eingabeaufforderung ausgeführt...",
+        2: "{}: unbekanntes Argument! Ignoriere es..."
     },
     6: { # Für den Test selbst:
         0: "Test wird ausgeführt",
