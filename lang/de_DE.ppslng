@@ -3,13 +3,13 @@
 # 
 # Diese Datei wurde erstellt von Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.1",
+    "ppsver": "0.3.2",
     "ppsver_warning": "Die Version von PyPerfScore, für die die importierte Sprachdatei gemacht ist ({}), stimmt nicht mit der von Ihnen genutzten Programmversion überein ({}). Wenn PyPerfScore unerwartet abstürzt oder irgendeinen Unsinn anzeigt, könnte dies das Problem sein.",
     "language": "de_DE",
     "language_string": "Deutsch - Deutschland",
     0: """Sprache "{}" ({}) erfolgreich importiert!""",
     1: """Sie nutzen PyPerfScore {}. Um auf neue Versionen zu überprüfen, schauen Sie bei "https://github.com/Stehlampe2020/PyPerfScore" nach.""",
-    2: NotImplemented, # Dieser "leere" Text existiert wegen eines Implementationsfehlers und wird später entfernt.
+    2: "Konnte die eigene Version nicht feststellen, setze Version auf 0.0.0...",
     3: { # Für die debug()-Klasse:
         0: "Die Minishell wurde mit einem ungültigen Argument für advanced_minishell aufgerufen: {} ({})",
         1: """
@@ -68,8 +68,20 @@ Geben Sie "exit()" ein, um die Debug-Eingabeaufforderung zu verlassen, "help()" 
         0: """Ihr Rechner scheint für eine Zielzahl von {} zu schnell zu sein (Testdauer < 1ms). Möglicherweise hilft ein Erhöhen der Zahl "cycles"?""",
         1: "Ein oder mehrere Module konnten nicht implementiert werden, der folgende Text ist das technische gebrabbel zu dem Fehler:",
         2: "Ein KeyboardInterrupt wurde erhoben.",
-        3: "Ein sofortiger Stopp PyPerfScores wurde angefordert (ein SystemExit wurde erhoben), der folgende Text ist das technische gebrabbel zu dem Fehler:",
+        3: "Ein sofortiger Stopp PyPerfScores wurde angefordert (ein SystemExit wurde erhoben) mit dem folgenden Fehlertext: {}",
         4: "Ein unerwarteter Fehler trat auf, der folgende Text ist das technische gebrabbel zu dem Fehler:"
     },
-    9: "Verlasse PyPerfScore..."
+    9: "Verlasse PyPerfScore...",
+    10: { # Für den Aktualisierungsskript:
+        "dl_types": {
+            0: "der Überprüfung auf eine neue Version",
+            1: "des Herunterladens der neuesten Aktualisierung"
+        },
+        "conn_error": "Ein Netzwerkfehler trat auf während {}. Fehlertext: {}",
+        0: "Sie müssen PyPerfScore nach der Aktualisierung neustarten!",
+        1: "Aktualisierung im Netz verfügbar! ({ver_old} → {ver_new}) Installiere...",
+        2: "Sie scheinen die neueste Version zu nutzen!",
+        3: "Lade herunter: {}"
+    },
+    11: "Versuchen Sie nicht, ein `debug`-Objekt zu erstellen, diese Klasse existiert nur, um die Debugfunktionen zu gruppieren!"
 }
