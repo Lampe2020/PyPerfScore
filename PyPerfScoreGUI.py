@@ -6,7 +6,7 @@ try:
     with open("lang/preferred.ppslng") as langfile:
         strings = eval(langfile.read())[7]
 except Exception as e:
-    print("Error: could not import language into module PyPerfScoreGUI! (Error message: {error_message})\nExiting PyPerfScore...".format(error_message=e))
+    print("Error: could not import language into module PyPerfScoreGUI! (Error message: {error_message})".format(error_message=e))
     exit("failed_to_import_language")
 
 try:
