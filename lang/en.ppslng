@@ -3,7 +3,7 @@
 # 
 # This file was made by Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.2",
+    "ppsver": "0.3.3",
     "ppsver_warning": "The version of PyPerfScore which the imported language file is made for ({}) doesn't match the version you're using ({}). If PyPerfScore crashes unexpectedly or displays some nonsense, this may be the cause.",
     "language": "en",
     "language_string": "English",
@@ -47,7 +47,8 @@ Type "exit()" to exit the debug shell, type "help()" for more information.""",
     },
     5: { # For argument handling:
         0: "No arguments detected, running in default mode...",
-        1: "You haven't given any arguments except the --debug argument, running in default mode with debug minishell..."
+        1: "You haven't given any arguments except the --debug argument, running in default mode with debug minishell...",
+        2: "{}: unknown argument! Ignoring it..."
     },
     6: { # For the test itself:
         0: "Running test",
