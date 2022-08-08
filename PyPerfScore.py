@@ -6,8 +6,13 @@ if __name__ != "__main__":
     completion_status = "cancelled"
     exit("{}\n{}".format(completion_status, None))
 
-# ——————————————— Initialization begin ———————————————
-version = "0.3.1"
+# ------------------------------ Initialization begin ------------------------------
+try:
+    with open("ver") as version_file:
+        version = version_file.read().strip()
+except OSError:
+    print("Could not get own version! Setting to 0.0.0...")
+    version = "0.0.0"
 release_type = "pre-alpha"
 update_nickname = "Complete recode update"
 
@@ -21,7 +26,7 @@ try:
         language_string = strings["language_string"]
         lang = strings["language"]
 except Exception as e:
-    print("Error: could not import language! (Error message: {error_message})\nExiting PyPerfScore...".format(error_message=e))
+    print("Error: could not import language! (Error message: {error_message})".format(error_message=e))
     exit("failed_to_import_language")
 else:
     print(strings[0].format(language_string, lang))
@@ -59,8 +64,17 @@ try:
         return strings[1].format(version_string)
     
     print(build_version_string())
+    
+    if argument("--update"):
+        completion_status = "update"
+        import ppsupdater
+        if argument("--exit"):
+            exit()
 
     class debug():
+        def __init__(self):
+            print(strings[11])
+            pass
         """ String-commented out because exec(<expression>) (in difference to eval(<expression>)) can interpret keywords:
         # Definition of the keyword replacements for the minishell:
         # <var1> in <var2>
@@ -155,7 +169,7 @@ try:
         def run(corecount):
             print(strings[4][0])
 
-    # ——————————————— Initialization end ———————————————
+    # ------------------------------ Initialization end ------------------------------
 
     if len(args) == 1:
         print(strings[5][0])
@@ -234,20 +248,19 @@ except ImportError:
 except KeyboardInterrupt:
     print("\r{}".format(strings[8][2]))
     completion_status = "cancelled"
-except SystemExit:
-    print(strings[8][3])
-    debug.print_last_traceback()
+except SystemExit as e:
+    print(strings[8][3].format(e))
+    # debug.print_last_traceback()
     if argument("--debug"):
         print("\n{}".format(strings[3][14]))
     completion_status = "cancelled"
     sys.exit()
-except:
-    print(strings[8][4])
-    debug.print_last_traceback()
+except Exception as e:
+    print(strings[8][4].format(type(e).__name__, e))
+    # debug.print_last_traceback()
     completion_status = "failed"
 finally:
     if argument("--debug"):
         debug.minishell(completion_status)
     print(strings[9])
     exit("{}\n{}".format(completion_status, score))
-
