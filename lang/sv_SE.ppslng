@@ -3,7 +3,7 @@
 # 
 # Detta filen var skapat från Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.0",
+    "ppsver": "0.3.3",
     "ppsver_warning": "Versionen av PyPerfScore som den importerade språkfilen har skapats för ({}) är inte programmversionen du användar nu ({}). Om PyPerfScore crashar eller visar meningslös text kan det vara därför.",
     "language": "sv_SE-BETA",
     "language_string": "Svenska - Sverige (BETA)",
@@ -47,7 +47,8 @@ För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "h
     },
     5: { # För argumentbehandling:
         0: "Hittade inga argumenter, kör nu i standardläge...",
-        1: "Du gav ingen argument utan --debug argumenten, kör nu i standardläge men med felsöksminishell..."
+        1: "Du gav ingen argument utan --debug argumenten, kör nu i standardläge men med felsöksminishell...",
+        2: "{}: okänd argument! Ignorerar den..."
     },
     6: { # För testet sig själv:
         0: "Kör testet",
@@ -79,7 +80,7 @@ För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "h
         },
         "conn_error": "En nätfel uppstod medan {}. Fel text: {}",
         0: "Du måste starta om PyPerfScore efter uppdateringen!",
-        1: "En uppdatering är tillgängligt på webben! ({ver_old} → {ver_new}) Installing...",
+        1: "En uppdatering är tillgängligt på webben! ({ver_old} → {ver_new}) Installerar...",
         2: "Du skener använda den nyaste versionen!",
         3: "Laddar ned: {}"
     },
