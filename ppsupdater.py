@@ -24,8 +24,8 @@ except OSError:
     print(could_not_import_ver)
     version = "0.0.0"
 
-base_path_remote = "https://stehlampe.lampe2020.de/github-projekte/PyPerfScore/latest/" # The remote base path. Ã¢ÂÂ "{}some_file".format(base_path_remote)
-base_path_local = "./" # The local base path. "./" refers to the current working directory. Later I will make a detector for the absolute path. Ã¢ÂÂ "{}some_file".format(base_path_local)
+base_path_remote = "https://github.com/Stehlampe2020/PyPerfScore/raw/main/" # The remote base path. → "{}some_file".format(base_path_remote)
+base_path_local = "./" # The local base path. "./" refers to the current working directory. Later I will make a detector for the absolute path. → "{}some_file".format(base_path_local)
 
 try:
     latest_ver = requests.get("{}ver".format(base_path_remote)).text.strip()
