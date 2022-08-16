@@ -3,7 +3,7 @@
 # 
 # This file was made by Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.3",
+    "ppsver": "0.3.4",
     "ppsver_warning": "The version of PyPerfScore which the imported language file is made for ({}) doesn't match the version you're using ({}). If PyPerfScore crashes unexpectedly or displays some nonsense, this may be the cause.",
     "language": "en",
     "language_string": "English",
@@ -82,7 +82,8 @@ Type "exit()" to exit the debug shell, type "help()" for more information.""",
         0: "You need to restart PyPerfScore after the update!",
         1: "Update available online! ({ver_old} → {ver_new}) Installing...",
         2: "You seem to use the newest version!",
-        3: "Downloading file: {}"
+        3: "Downloading... {}% - {}",
+        4: "Complete!"
     },
     11: "Don't try to create a `debug` object, this class exists just to group the debug functions!"
 }
