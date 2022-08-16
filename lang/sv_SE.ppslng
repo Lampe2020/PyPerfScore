@@ -3,7 +3,7 @@
 # 
 # Detta filen var skapat från Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.3",
+    "ppsver": "0.3.4",
     "ppsver_warning": "Versionen av PyPerfScore som den importerade språkfilen har skapats för ({}) är inte programmversionen du användar nu ({}). Om PyPerfScore crashar eller visar meningslös text kan det vara därför.",
     "language": "sv_SE-BETA",
     "language_string": "Svenska - Sverige (BETA)",
@@ -82,7 +82,8 @@ För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "h
         0: "Du måste starta om PyPerfScore efter uppdateringen!",
         1: "En uppdatering är tillgängligt på webben! ({ver_old} → {ver_new}) Installerar...",
         2: "Du skener använda den nyaste versionen!",
-        3: "Laddar ned: {}"
+        3: "Laddar ned... {}% - {}",
+        4: "Färdig!"
     },
     11: "Försök inte att föra en `debug`-objekt, klassen existerar bara för att gruppera felsöksfunktioner!"
 }
