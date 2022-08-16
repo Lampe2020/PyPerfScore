@@ -13,7 +13,7 @@ try:
 except OSError:
     print("Could not get own version! Setting to 0.0.0...")
     version = "0.0.0"
-release_type = "pre-alpha"
+release_type = "alpha"
 update_nickname = "Complete recode update"
 
 try:
