@@ -1,6 +1,9 @@
+#!/usr/bin/env python3
+# -*- encoding: utf-8 -*-
+
 import requests
 
-if __name__ not in ("ppsupdater", "__main__"):
+if __name__ not in ("__main__", "ppsupdater"):
     print("The updater should only be run by PyPerfScore as ppsupdater!")
     exit("updater_ran_wrongly")
 
@@ -21,7 +24,7 @@ except OSError:
     print(could_not_import_ver)
     version = "0.0.0"
 
-base_path_remote = "https://github.com/Stehlampe2020/PyPerfScore/raw/main/" # The remote base path. → "{}some_file".format(base_path_remote)
+base_path_remote = "https://stehlampe.lampe2020.de/github-projekte/PyPerfScore/latest/" # The remote base path. → "{}some_file".format(base_path_remote)
 base_path_local = "./" # The local base path. "./" refers to the current working directory. Later I will make a detector for the absolute path. → "{}some_file".format(base_path_local)
 
 try:
@@ -34,7 +37,6 @@ if version != latest_ver:
     
     # Check for files to be downloaded:
     files_to_download = requests.get("{}files.list".format(base_path_remote)).text.strip().split("\n")
-    prev_filename = None
     for filename in files_to_download:
         with open("".join([base_path_local, filename]), "w") as file:
             if prev_filename:
