@@ -3,7 +3,7 @@
 # 
 # Diese Datei wurde erstellt von Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.3",
+    "ppsver": "0.3.4",
     "ppsver_warning": "Die Version von PyPerfScore, für die die importierte Sprachdatei gemacht ist ({}), stimmt nicht mit der von Ihnen genutzten Programmversion überein ({}). Wenn PyPerfScore unerwartet abstürzt oder irgendeinen Unsinn anzeigt, könnte dies das Problem sein.",
     "language": "de_DE",
     "language_string": "Deutsch - Deutschland",
@@ -82,7 +82,8 @@ Geben Sie "exit()" ein, um die Debug-Eingabeaufforderung zu verlassen, "help()" 
         0: "Sie müssen PyPerfScore nach der Aktualisierung neustarten!",
         1: "Aktualisierung im Netz verfügbar! ({ver_old} → {ver_new}) Installiere...",
         2: "Sie scheinen die neueste Version zu nutzen!",
-        3: "Lade herunter: {}"
+        3: "Herunterladen... - {}% - {}",
+        4: "Fertig!"
     },
     11: "Versuchen Sie nicht, ein `debug`-Objekt zu erstellen, diese Klasse existiert nur, um die Debugfunktionen zu gruppieren!"
 }
