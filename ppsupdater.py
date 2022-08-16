@@ -1,9 +1,6 @@
 import requests
 
-if __name__ == "__main__":
-    print("Please don't run the updater seperately, use `pyperfscore --update` for that!")
-    exit("updater_ran_seperately")
-elif __name__ != "ppsupdater":
+if __name__ not in ("ppsupdater", "__main__"):
     print("The updater should only be run by PyPerfScore as ppsupdater!")
     exit("updater_ran_wrongly")
 
@@ -37,10 +34,16 @@ if version != latest_ver:
     
     # Check for files to be downloaded:
     files_to_download = requests.get("{}files.list".format(base_path_remote)).text.strip().split("\n")
+    prev_filename = None
     for filename in files_to_download:
         with open("".join([base_path_local, filename]), "w") as file:
-            print(strings[3].format(filename))
+            if prev_filename:
+                print(strings[3].format(round((files_to_download.index(filename) / 100) / (len(files_to_download) / 100) * 100, 1), filename + len(prev_filename)*" "), end="\r") # The length of the previous file name is important to make the output nicer, with no stray characters.
+            else:
+                print(strings[3].format(0.0, filename), end="\r")
             file.write(requests.get("".join([base_path_remote, filename])).text)
+        prev_filename = filename
+    print(strings[3].format(100.0, strings[4]))
     
     raise SystemExit(strings[0]) # Notify the user that a restart of PyPerfScore is necessary and then quit.
 else:
