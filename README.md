@@ -21,4 +21,5 @@ And the rounding has another benefit: it makes probable measuring inaccuracies c
 |`~$ pyperfscore`|This will run the program in default mode, which is (for now) the command-line mode.|
 |`~$ pyperfscore --cmdline`|Explicitly run the program in command-line mode.|
 |`~$ pyperfscore --gui`|Explicitly run the program in GUI mode. *Note: This option isn't currently implemented and will fail on run.*|
-|`~$ pyperfscore --update`|Tell PyPerfScore to check for the newest version and install it if possible. *Note: This option is currently not implemented.*
+|`~$ pyperfscore --update`|Tell PyPerfScore to check for the newest version and install it if possible. Run the test if no update happened.|
+|`~$ pyperfscore --update --exit|Tell PyPerfScore to check for the newest version and install it if possible. NOT run the test after checking for updates.|
