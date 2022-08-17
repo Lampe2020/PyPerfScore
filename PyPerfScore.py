@@ -253,15 +253,17 @@ except KeyboardInterrupt:
     print("\r{}".format(strings[8][2]))
     completion_status = "cancelled"
 except SystemExit as e:
+    if argument("--debug"):
+        args.remove("--debug")
     print(strings[8][3].format(e))
     # debug.print_last_traceback()
-    if argument("--debug"):
-        print("\n{}".format(strings[3][14]))
     completion_status = "cancelled"
     sys.exit()
 except Exception as e:
     print(strings[8][4].format(type(e).__name__, e))
     # debug.print_last_traceback()
+    if argument("--debug"):
+        print("\n{}".format(strings[3][14]))
     completion_status = "failed"
 finally:
     if argument("--debug"):
