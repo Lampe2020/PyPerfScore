@@ -83,7 +83,8 @@ Geben Sie "exit()" ein, um die Debug-Eingabeaufforderung zu verlassen, "help()" 
         1: "Aktualisierung im Netz verfügbar! ({ver_old} → {ver_new}) Installiere...",
         2: "Sie scheinen die neueste Version zu nutzen!",
         3: "Herunterladen... - {}% - {}",
-        4: "Fertig!"
+        4: "Fertig!",
+        5: "Die angeforderte Version ({release}) kann nicht installiert werden, weil sie keine files.list hat!"
     },
     11: "Versuchen Sie nicht, ein `debug`-Objekt zu erstellen, diese Klasse existiert nur, um die Debugfunktionen zu gruppieren!"
 }
