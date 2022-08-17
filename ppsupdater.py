@@ -34,7 +34,7 @@ except ConnectionError as e:
     
 if version != latest_ver:
     print(strings[1].format(ver_old=version, ver_new=latest_ver)) # Notify the user that a newer version is available.
-    
+
     # Check for files to be downloaded:
     files_to_download = requests.get("{}files.list".format(base_path_remote)).text.strip().split("\n")
     prev_filename = None
@@ -47,6 +47,9 @@ if version != latest_ver:
             file.write(requests.get("".join([base_path_remote, filename])).text)
         prev_filename = filename
     print(strings[3].format(100.0, strings[4]))
+    
+    import os
+    os.chmod("PyPerfScore.py", 0o775) # os.system("chmod +x ./PyPerfScore.py") # Make `PyPerfScore.py` executable.
     
     raise SystemExit(strings[0]) # Notify the user that a restart of PyPerfScore is necessary and then quit.
 else:
