@@ -84,6 +84,12 @@ if version != latest_ver:
                 os.mkdir(filename) # If there's a directory in files.list (recognizable by the / at the end of the name): create it if it doesn't exist yet.
             except FileExistsError:
                 pass
+        elif "→" in filename:
+            name, target = filename.split("→", 1) # The 1 is just there to make sure that the filename string isn't split on more than one location.
+            try:
+                os.symlink(target, base_path_local+name) # Create links specified in files.list if they're not existing yet.
+            except FileExistsError:
+                pass
         else:
             with open("".join([base_path_local, filename]), "w") as file: # open the full local path.
                 if prev_filename:
