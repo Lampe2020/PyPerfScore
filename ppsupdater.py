@@ -78,13 +78,20 @@ if version != latest_ver:
     files_to_download = requests.get("{}files.list".format(base_path_remote)).text.strip().split("\n")
     prev_filename = None
     for filename in files_to_download:
-        with open("".join([base_path_local, filename]), "w") as file:
-            if prev_filename:
-                print(strings[3].format(round((files_to_download.index(filename) / 100) / (len(files_to_download) / 100) * 100, 1), filename + len(prev_filename)*" "), end="\r") # The length of the previous file name is important to make the output nicer, with no stray characters.
-            else:
-                print(strings[3].format(0.0, filename), end="\r")
-            file.write(requests.get("".join([base_path_remote, filename])).text)
-        prev_filename = filename
+        filename = filename.split("#")[0].strip() # This line removes possible comments from the file list by just taking everything before the first hashmark.
+        if filename[-1] == "/":
+            try:
+                os.mkdir(filename) # If there's a directory in files.list (recognizable by the / at the end of the name): create it if it doesn't exist yet.
+            except FileExistsError:
+                pass
+        else:
+            with open("".join([base_path_local, filename]), "w") as file: # open the full local path.
+                if prev_filename:
+                    print(strings[3].format(round((files_to_download.index(filename) / 100) / (len(files_to_download) / 100) * 100, 1), filename + len(prev_filename)*" "), end="\r") # The length of the previous file name is important to make the output nicer, with no stray characters at the end of the line.
+                else:
+                    print(strings[3].format(0.0, filename), end="\r")
+                file.write(requests.get("".join([base_path_remote, filename])).text)
+            prev_filename = filename
     print(strings[3].format(100.0, strings[4]))
     
     os.chmod("".join([base_path_local, "ppsupdater.py"]), 0o775) # Make `ppsupdater.py` executable.
