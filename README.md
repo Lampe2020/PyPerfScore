@@ -12,7 +12,7 @@ And the rounding has another benefit: it makes probable measuring inaccuracies c
 -> Python module `tkinter` (will only be tried to load if `--gui` or `--full-gui` command-line arguments are used)
    
 # Usage
-*In the examples below I used the installed version, you will have to use the command to start your copy instead of `pyperfscore`, if you don't have it installed as `pyperfscore`!*    
+*In the examples below the command is shortened, you will have to use `./PyPerfScore.py` instead of `pyperfscore` and `./ppsupdater.py` instead of `ppsupdater`, from the directory PyPerfScore was installed in!*    
 
 |Command|Description|
 |-------|-----------|
@@ -23,3 +23,6 @@ And the rounding has another benefit: it makes probable measuring inaccuracies c
 |`~$ pyperfscore --gui`|Explicitly run the program in GUI mode. *Note: This option isn't currently implemented and will fail on run.*|
 |`~$ pyperfscore --update`|Tell PyPerfScore to check for the newest version and install it if possible. Run the test if no update happened.|
 |`~$ pyperfscore --update --exit`|Tell PyPerfScore to check for the newest version and install it if possible. NOT run the test after checking for updates.|
+|*The following two options can be used together:*||
+|`~$ ppsupdater --ver=v0.0.0-version`|This will install the version `v0.0.0-version` instead of the latest version (if possible, otherwise it will show an error message and quit).|
+|`~$ ppsupdater --path=/path/to/existing/directory`|This will install the update in `/path/to/existing/directory` instead of overwriting the current installation with the new one.|
