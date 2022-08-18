@@ -1,7 +1,8 @@
-lang/
+lang/ # This directory contains the language files.
 lang/en.ppslng
 lang/de_DE.ppslng
 lang/sv_SE.ppslng
+lang/preferred.ppslng→en.ppslng # This link will make English the default language.
 LICENSE.md
 ppsupdater.py
 PyPerfScore.py
