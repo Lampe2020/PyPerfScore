@@ -3,7 +3,7 @@
 # 
 # Detta filen var skapat från Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.4",
+    "ppsver": "0.3.5",
     "ppsver_warning": "Versionen av PyPerfScore som den importerade språkfilen har skapats för ({}) är inte programmversionen du användar nu ({}). Om PyPerfScore crashar eller visar meningslös text kan det vara därför.",
     "language": "sv_SE-BETA",
     "language_string": "Svenska - Sverige (BETA)",
