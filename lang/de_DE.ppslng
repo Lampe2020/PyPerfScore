@@ -3,7 +3,7 @@
 # 
 # Diese Datei wurde erstellt von Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.4",
+    "ppsver": "0.3.5",
     "ppsver_warning": "Die Version von PyPerfScore, für die die importierte Sprachdatei gemacht ist ({}), stimmt nicht mit der von Ihnen genutzten Programmversion überein ({}). Wenn PyPerfScore unerwartet abstürzt oder irgendeinen Unsinn anzeigt, könnte dies das Problem sein.",
     "language": "de_DE",
     "language_string": "Deutsch - Deutschland",
