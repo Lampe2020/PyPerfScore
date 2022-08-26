@@ -81,10 +81,11 @@ Type "exit()" to exit the debug shell, type "help()" for more information.""",
         "conn_error": "A network error occurred while {}. Error message: {}",
         0: "You need to restart PyPerfScore after the update!",
         1: "Update available online! ({ver_old} → {ver_new}) Installing...",
-        2: "You seem to use the newest version!",
+        2: "This version is already installed!",
         3: "Downloading... {}% - {}",
         4: "Complete!",
-        5: "The requested version ({release}) can't be downloaded because it has no files.list!"
+        5: "The requested version ({release}) can't be downloaded because it has no files.list!",
+        6: "Could not get version strings, exiting PyPerfScore..."
     },
     11: "Don't try to create a `debug` object, this class exists just to group the debug functions!"
 }
