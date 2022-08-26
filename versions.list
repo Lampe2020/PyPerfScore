@@ -1,0 +1,5 @@
+# Versions: latest/latest-stable/older
+{
+    "latest": "main",
+    "latest-stable": "v0.3.4-alpha"
+}
