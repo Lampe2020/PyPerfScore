@@ -90,7 +90,7 @@ if version != latest_ver:
                 os.symlink(target, base_path_local+name) # Create links specified in files.list if they're not existing yet.
             except FileExistsError:
                 pass
-        else:
+        if not "→" in filename and not filename[-1] == "/":
             with open("".join([base_path_local, filename]), "w") as file: # open the full local path.
                 if prev_filename:
                     print(strings[3].format(round((files_to_download.index(filename) / 100) / (len(files_to_download) / 100) * 100, 1), filename + len(prev_filename)*" "), end="\r") # The length of the previous file name is important to make the output nicer, with no stray characters at the end of the line.
