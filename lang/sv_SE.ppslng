@@ -58,7 +58,7 @@ För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "h
     7: { # Text för grafisk programmytan:
         0: "Startar grafisk programmyta...",
         1: {
-            0: "Varning: tkinter kunde inte importeras! Installera tkinter ordentligt! Om du inde göra det kan PyPerfScore bara kör i kommandoytaläge (pyperfscore --cmdline).", # "kommandoytaläge"?! Jag är inte säker på detta ord. Jag måste ändra på det...
+            0: "Varning: tkinter kunde inte importeras! Installera tkinter ordentligt! Om du inde göra det kan PyPerfScore bara kör i kommandoytaläge (pyperfscore --cmdline).", # "kommandoytaläge"?! Jag är inte säker på detta ord. Jag måste kanske ändra på det...
             1: "tkinter saknas!",
         },
         2: "Grafisk programmytan är inte implementerad!",
@@ -81,10 +81,11 @@ För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "h
         "conn_error": "En nätfel uppstod medan {}. Fel text: {}",
         0: "Du måste starta om PyPerfScore efter uppdateringen!",
         1: "En uppdatering är tillgängligt på webben! ({ver_old} → {ver_new}) Installerar...",
-        2: "Du skener använda den nyaste versionen!",
+        2: "Versionen är redan installerat!",
         3: "Laddar ned... {}% - {}",
         4: "Färdig!",
-        5: "Förfrågade versionen ({release}) kunde inte laddas ned för att den har ingen files.list!"
+        5: "Förfrågade versionen ({release}) kunde inte laddas ned för att den har ingen files.list!",
+        6: "Kunde inte få versionssträngar, avslutar PyPerfScore..."
     },
-    11: "Försök inte att föra en `debug`-objekt, klassen existerar bara för att gruppera felsöksfunktioner!"
+    11: "Försök inte att föra en `debug`-objekt, klassen existerar bara för att gruppera felsöksfunktionerna!"
 }
