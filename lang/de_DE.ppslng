@@ -81,10 +81,11 @@ Geben Sie "exit()" ein, um die Debug-Eingabeaufforderung zu verlassen, "help()" 
         "conn_error": "Ein Netzwerkfehler trat auf während {}. Fehlertext: {}",
         0: "Sie müssen PyPerfScore nach der Aktualisierung neustarten!",
         1: "Aktualisierung im Netz verfügbar! ({ver_old} → {ver_new}) Installiere...",
-        2: "Sie scheinen die neueste Version zu nutzen!",
+        2: "Die Version ist bereits installiert!",
         3: "Herunterladen... - {}% - {}",
         4: "Fertig!",
-        5: "Die angeforderte Version ({release}) kann nicht installiert werden, weil sie keine files.list hat!"
+        5: "Die angeforderte Version ({release}) kann nicht installiert werden, weil sie keine files.list hat!",
+        6: "Konnte die Versionsstrings nicht herausfinden, verlasse PyPerfScore..."
     },
     11: "Versuchen Sie nicht, ein `debug`-Objekt zu erstellen, diese Klasse existiert nur, um die Debugfunktionen zu gruppieren!"
 }
