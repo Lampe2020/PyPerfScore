@@ -45,7 +45,16 @@ requested_ver = argument("--ver")
 requested_path = argument("--path")
 
 if requested_ver:
-    if requests.get(base_path_remote.format(release=str(requested_ver))+"files.list").status_code == 200:
+    if requested_ver in ("latest-stable", "stable"):
+        vstrings = requests.get("".join([base_path_remote.format(release="main"), "versions.list"]))
+        if not vstrings:
+            print(strings[6])
+            exit("could_not_get_version_strings")
+        else:
+            requested_ver = eval(vstrings.text)["latest-stable"]
+    elif requested_ver == "latest":
+        requested_ver = "main"
+    if requests.get(base_path_remote.format(release=str(requested_ver))+"files.list"):
         base_path_remote = base_path_remote.format(release=requested_ver)
     else:
         print(strings[5].format(release=requested_ver))
