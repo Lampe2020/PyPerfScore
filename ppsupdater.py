@@ -79,8 +79,11 @@ if requested_path:
 
 try:
     latest_ver = requests.get("{}ver".format(base_path_remote)).text.strip()
+    if len(latest_ver) > 5:
+        latest_ver = eval(latest_ver)["number"]
 except ConnectionError as e:
     print(strings["conn_error"].format(strings["dl_types"][0], e))
+    exit()
     
 if ver_strings["number"] != latest_ver:
     print(strings[1].format(ver_old=ver_strings["number"], ver_new=latest_ver)) # Notify the user that a newer version is available.
