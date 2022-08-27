@@ -1,4 +1,5 @@
-# Versions: latest/latest-stable/older
+# Versions: latest and latest-stable (listed below) and older (not listed below)
+# This file exists to make the updater universal and not need to change a hardcoded list inside the updater everytimes this changes.
 {
     "latest": "main",
     "latest-stable": "v0.3.5-alpha"
