@@ -3,10 +3,42 @@
 # 
 # This file was made by Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.5",
+    "ppsver": "0.4.0",
     "ppsver_warning": "The version of PyPerfScore which the imported language file is made for ({}) doesn't match the version you're using ({}). If PyPerfScore crashes unexpectedly or displays some nonsense, this may be the cause.",
     "language": "en",
     "language_string": "English",
+    "help": """
+PyPerfScore is a benchmarking program for testing the CPU power Python3-based.
+
+Usage: `{example_command}`
+    --singlecore|--multicore[=<subproc_count>] Starts PyPerfScore in singlecore
+                                               mode / in multicore mode,
+                                               optionally with <subproc_count>
+                                               subprocesses. Note: If
+                                               <subproc_count> is higher than
+                                               the system's number of processor
+                                               cores you need to specify
+                                               `--force-corecount` to run the
+                                               test with that many
+                                               subprocesses!
+    --cmdline|--gui                            Starts PyPerfScore explicitly in
+                                               command-line / graphical mode.
+    --debug                                    Starts PyPerfScore in debug mode
+                                               which lets you inspect the
+                                               namespace after the main program
+                                               stopped.
+    --update[ --exit| <args>]                  Updates PyPerfScore to the
+                                               latest version. If PyPerfScore
+                                               is up-to-date and the `--exit`
+                                               argument isn't specified the
+                                               test will run with the arguments
+                                               specified in <args>.
+    --help|-h[ --gui]                          Display this help and then exit.
+                                               If the GUI is available and you
+                                               give both arguments `--help` and
+                                               `--gui` the GUI will display the
+                                               help text too.
+    """,
     0: """Language "{}" ({}) successfully imported!""",
     1: """You are using PyPerfScore {}. To check for newer versions, please check out "https://github.com/Stehlampe2020/PyPerfScore".""",
     2: "Could not get own version! Setting to 0.0.0...",
@@ -43,12 +75,16 @@ Type "exit()" to exit the debug shell, type "help()" for more information.""",
     4: { # multiprocessing-specific text:
         0: "multithreading: Not implemented yet!",
         1: "Because you haven't given an argument specifying if PyPerfScore should run in single or multicore mode the default will be loaded.",
-        2: "The multicore mode doesn't exist yet. Going into singlecore mode instead..."
+        2: "The multicore mode is only experimental!",
+        3: "You can't have less than one processor core! (but started the test with a core_count of {})"
     },
     5: { # For argument handling:
+        "warning_corecount": "WARNING! You're trying to run PyPerfScore with more subprocesses ({req_subpr}) than available processor cores ({avail_cores})! This may crash your computer!",
         0: "No arguments detected, running in default mode...",
         1: "You haven't given any arguments except the --debug argument, running in default mode with debug minishell...",
-        2: "{}: unknown argument! Ignoring it..."
+        2: "{}: unknown argument! Ignoring it...",
+        3: "Your computer needed {} seconds to count from zero to {} on {} cores.",
+        4: "Waiting for the other cores to finish counting..."
     },
     6: { # For the test itself:
         0: "Running test",
