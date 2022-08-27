@@ -3,10 +3,43 @@
 # 
 # Detta filen var skapat från Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.5",
+    "ppsver": "0.4.0",
     "ppsver_warning": "Versionen av PyPerfScore som den importerade språkfilen har skapats för ({}) är inte programmversionen du användar nu ({}). Om PyPerfScore crashar eller visar meningslös text kan det vara därför.",
     "language": "sv_SE-BETA",
     "language_string": "Svenska - Sverige (BETA)",
+    "help": """
+PyPerfScore är en Python3-baserad CPU-benchmark.
+
+Användning: `{example_command}`
+    --singlecore|--multicore[=<subproc_count>] Startar PyPerfScore i enkelkärn-
+                                               / flerkärnläge, optionellt med
+                                               <subproc_count> subprocesser.
+                                               Tip: Om <subproc_count> är högre
+                                               än antalet av darorns
+                                               processorkärnor måste du ange
+                                               `--force-corecount` om du vill
+                                               att testet körs med så många
+                                               subprocesser.
+    --cmdline|--gui                            Startar PyPerfScore explicit i
+                                               kommandoytan- / grafisk läget.
+    --debug                                    Startar PyPerfScore i
+                                               felsöksläget som låter dig
+                                               inspektera namnutrymmet efter
+                                               programmet stoppade(s).
+    --update[ --exit| <args>]                  Uppdaterar PyPerfScore till
+                                               nyaste versionen. Om PyPerfScore
+                                               är redan på nyaste versionen och
+                                               `--exit`-argumenten saknas
+                                               kommer testet att köra med
+                                               argumenterna <args>.
+    --help|-h[ --gui]                          Visar denna hjälptext och
+                                               avslutar PyPerfScore. Om grafisk
+                                               programytan är installerad och
+                                               du anger båda `--help`- och
+                                               `--gui`-argumentet kommer
+                                               hjälptextet att också visas i en
+                                               grafisk fönster.
+    """,
     0: """Språket "{}" ({}) importerats framgångsrik!""",
     1: """Du användar PyPerfScore {}. För att få en nyare version, gå till "https://github.com/Stehlampe2020/PyPerfScore".""",
     2: "Kunde inte hitta egen versionsnummer! Sätta den till 0.0.0...",
@@ -43,27 +76,31 @@ För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "h
     4: { # multiprocessing-specifisk text:
         0: "multithreading: Inte än implementerad!",
         1: "För att du gav ingen argument som bestämmer om PyPerfScore ska köra i enkel- eller flerkärnläge standarden ska laddas.",
-        2: "Flerkärnläget existerar inte än, kör i standardläge istället..."
+        2: "Flerkärnläget är experimentell just nu!",
+        3: "Du kan inte ha mindre än en processorkärna! (men startade testet med en core_count av {})"
     },
     5: { # För argumentbehandling:
+        "warning_corecount": "VARNING! Du vörsöker köra PyPerfScore med flera subprocesser ({req_subpr}) än tillgängliga processorkärnor ({avail_cores})! Detta kan kommer att krascha din dator!",
         0: "Hittade inga argumenter, kör nu i standardläge...",
         1: "Du gav ingen argument utan --debug argumenten, kör nu i standardläge men med felsöksminishell...",
-        2: "{}: okänd argument! Ignorerar den..."
+        2: "{}: okänd argument! Ignorerar den...",
+        3: "Din dator behövde {} sekunder för att tala från null till {} på {} processorkärnor.",
+        4: "Väntar på att de andra processorkärnor slutar tala..."
     },
     6: { # För testet sig själv:
         0: "Kör testet",
         1: "Din dator behövde {} sekunder för att tala från null till {} så snabb som möjlig.",
         2: "Så din dator har {} punkter."
     },
-    7: { # Text för grafisk programmytan:
+    7: { # Text för grafisk programytan:
         0: "Startar grafisk programmyta...",
         1: {
             0: "Varning: tkinter kunde inte importeras! Installera tkinter ordentligt! Om du inde göra det kan PyPerfScore bara kör i kommandoytaläge (pyperfscore --cmdline).", # "kommandoytaläge"?! Jag är inte säker på detta ord. Jag måste kanske ändra på det...
             1: "tkinter saknas!",
         },
-        2: "Grafisk programmytan är inte implementerad!",
+        2: "Grafisk programytan är inte implementerad!",
         3: "PyPerfScoreGUI är inte implementerad!",
-        4: "Tip: Grafisk programmytan är inte än implementerad! Jag ska bry om den när kommandoytalägen (pyperfscore --cmdline) är implementerad ordentligt."
+        4: "Tip: Grafisk programytan är inte än implementerad! Jag ska bry om den när kommandoytalägen (pyperfscore --cmdline) är implementerad ordentligt."
     },
     8: { # For the error handling:
         0: """Din dator är för snabb för en målnummer av {} rundor. Kanske hjälper det om du förstorar målnummern "cycles"?""",
