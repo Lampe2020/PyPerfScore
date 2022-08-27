@@ -1,3 +1,5 @@
+*Because not every bugfix or README.md change will result in a version change it may be good to delete the file `ver` after downloading and then running the updater. This is not required with the installer, only with the manual download from the "Releases" page.*
+
 # What is "PyPerfScore" and how does it work? 
 This is a little Python program that counts up from zero to 100,000,000 (that's the default value for `cycles`) as fast as the CPU allows. The program takes a timestamp before and after the `while` loop runs. When it finishes counting from zero to 1,000,000 the program subtracts the first timestamp from the second one to get the time the loop actually took to run through. Then it divides the amount of runs through the loop (the value of `cycles`) with the time it needed to complete.   
 Before it exits it prints the resulting score to the screen, rounding the time it took to complete to three decimal points and the score to zero decimal points so the user doesn't need to understand the big mass of numbers and just gets accurate but still easily understandable numbers to work with.   
