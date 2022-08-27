@@ -33,10 +33,12 @@ def argument(argument_to_search_for):
 
 try:
     with open("ver") as version_file:
-        version = version_file.read().strip()
+        ver_strings = eval(version_file.read().strip())
 except OSError:
     print(could_not_import_ver)
-    version = "0.0.0"
+    ver_strings = {"number": "0.0.0"}
+    ver_strings["type"] = "vnotfound"
+    ver_strings["nickname"] = None
 
 base_path_remote = "https://raw.githubusercontent.com/Stehlampe2020/PyPerfScore/{release}/" # The remote base path. → "{}some_file".format(base_path_remote)
 base_path_local = "./" # The local base path. "./" refers to the current working directory. Later I will make a detector for the absolute path. → "{}some_file".format(base_path_local)
@@ -49,7 +51,7 @@ if requested_ver:
         vstrings = requests.get("".join([base_path_remote.format(release="main"), "versions.list"]))
         if not vstrings:
             print(strings[6])
-            exit("could_not_get_version_strings")
+            exit("could_not_get_ver_strings")
         else:
             requested_ver = eval(vstrings.text)["latest-stable"]
     elif requested_ver == "latest":
@@ -73,15 +75,15 @@ if requested_path:
         except FileExistsError:
             pass # If the directory already exists, just go on.
         base_path_local = requested_path
-        version = "--path" # Tell the program that it's not installed yet where --path specifies it. This works by changing the version string to one that's definetly not the target version!
+        ver_strings["number"] = "--path" # Tell the program that it's not installed yet where --path specifies it. This works by changing the version string to one that's definetly not the target ver_strings["number"]!
 
 try:
     latest_ver = requests.get("{}ver".format(base_path_remote)).text.strip()
 except ConnectionError as e:
     print(strings["conn_error"].format(strings["dl_types"][0], e))
     
-if version != latest_ver:
-    print(strings[1].format(ver_old=version, ver_new=latest_ver)) # Notify the user that a newer version is available.
+if ver_strings["number"] != latest_ver:
+    print(strings[1].format(ver_old=ver_strings["number"], ver_new=latest_ver)) # Notify the user that a newer version is available.
 
     # Check for files to be downloaded:
     files_to_download = requests.get("{}files.list".format(base_path_remote)).text.strip().split("\n")
