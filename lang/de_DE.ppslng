@@ -3,10 +3,51 @@
 # 
 # Diese Datei wurde erstellt von Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.3.5",
+    "ppsver": "0.4.0",
     "ppsver_warning": "Die Version von PyPerfScore, für die die importierte Sprachdatei gemacht ist ({}), stimmt nicht mit der von Ihnen genutzten Programmversion überein ({}). Wenn PyPerfScore unerwartet abstürzt oder irgendeinen Unsinn anzeigt, könnte dies das Problem sein.",
     "language": "de_DE",
     "language_string": "Deutsch - Deutschland",
+    "help": """
+PyPerfScore ist ein Benchmarkprogramm, um Python3-basiert die CPU-Leistung zu testen.
+
+Gebrauch: `{example_command}`
+    --singlecore|--multicore[=<subproc_count>] Startet PyPerfScore im
+                                               Einzelkern- / Mehrkernmodus,
+                                               optional mit <subproc_count>
+                                               Unterprozessen. Hinweis: Wenn
+                                               <subproc_count> höher als die
+                                               Anzahl der verfügbaren
+                                               Prozessorkerne ist, müssen Sie
+                                               `--force-corecount` zusätzlich
+                                               verwenden, um den Test mit so
+                                               vielen Unterprozessen zu
+                                               starten!
+    --cmdline|--gui                            Startet PyPerfScore explizit im
+                                               Kommandozeilen- / graphischen
+                                               Modus.
+    --debug                                    Startet PyPerfScore im
+                                               Debugmodus, worin Sie den
+                                               Namensraum inspizieren könnne,
+                                               nachdem das eigentliche Programm
+                                               fertig ist oder abgebrochen
+                                               wurde.
+    --update[ --exit| <args>]                  Aktualisiert PyPerfScore auf die
+                                               neueste Version. Wenn
+                                               PyPerfScore bereits in der
+                                               neuesten Version vorliegt und
+                                               das Argument `--exit` nicht
+                                               angegeben ist, wird der Test mit
+                                               den argumenten <args>
+                                               ausgeführt.
+    --help|-h[ --gui]                          Zeigt diesen Hilfetext an und
+                                               stoppt PyPerfScore sofort
+                                               danach. Wenn die GUI installiert
+                                               ist und Sie sowohl das `--help`-
+                                               als auch das `--gui`-Argument
+                                               angeben, wird der Hilfetext auch
+                                               in einem graphischen Fenster
+                                               angezeigt.
+    """,
     0: """Sprache "{}" ({}) erfolgreich importiert!""",
     1: """Sie nutzen PyPerfScore {}. Um auf neue Versionen zu überprüfen, schauen Sie bei "https://github.com/Stehlampe2020/PyPerfScore" nach.""",
     2: "Konnte die eigene Version nicht feststellen, setze Version auf 0.0.0...",
@@ -43,16 +84,20 @@ Geben Sie "exit()" ein, um die Debug-Eingabeaufforderung zu verlassen, "help()" 
     4: { # multiprocessing-spezifischer text:
         0: "multithreading: noch nicht implementiert!",
         1: "Weil Sie kein Argument angegeben haben, das festlegt, ob der Test im Einzel- oder Mehrkernmodus gestartet werden soll, wird der Standard geladen.",
-        2: "Der Mehrkernmodus existiert noch nicht. Wechseln zum Einzelkernmodus..."
-    },
+        2: "Der Mehrkernmodus ist noch experimentell!",
+        3: "Sie können nicht weniger als einen Prozessorkern haben! (aber starteten den Test mit einem core_count von {})"
+    }
     5: { # Für die Argumentauslesung:
+        "warning_corecount": "WARNUNG! Sie versuchen, PyPerfScore mit mehr Subprozessen ({req_subpr}) als verfügbaren Prozessorkernen ({avail_cores}) auszuführen! Dies könnte Ihren Rechner zum Absturz bringen!",
         0: "Keine Argumente erkannt, wird im Standardmodus ausgeführt...",
         1: "Sie haben keine Argumente außer --debug angegeben, wird im Standardmodus mit anschließender Eingabeaufforderung ausgeführt...",
-        2: "{}: unbekanntes Argument! Ignoriere es..."
+        2: "{}: unbekanntes Argument! Ignoriere es...",
+        3: "Ihr Rechner brauchte {} Sekunden, um so schnell wie möglich von null bis {} auf {} Prozessorkernen zu zählen.",
+        4: "Warte darauf, dass die anderen Prozessorkerne fertigzählen..."
     },
     6: { # Für den Test selbst:
         0: "Test wird ausgeführt",
-        1: "Ihr Rechner brauchte {} Sekunden, um so schnell wie möglich von null zu {} hochzuzählen.",
+        1: "Ihr Rechner brauchte {} Sekunden, um so schnell wie möglich von null bis {} zu zählen.",
         2: "Also beträgt der Punktestand {} Punkte."
     },
     7: { # Der Text der graphischen Oberfläche:
