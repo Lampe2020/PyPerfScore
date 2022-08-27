@@ -7,22 +7,22 @@ if __name__ != "__main__":
     exit("{}\n{}".format(completion_status, None))
 
 # ------------------------------ Initialization begin ------------------------------
-try:
-    with open("ver") as version_file:
-        version = version_file.read().strip()
-except OSError:
-    print("Could not get own version! Setting to 0.0.0...")
-    version = "0.0.0"
-release_type = "alpha"
-update_nickname = "Complete recode update"
 
 try:
     with open("lang/preferred.ppslng") as langfile:
         strings = eval(langfile.read())
         if type(strings) != dict:
             raise SyntaxError("Tried to import a faulty language file into PyPerfScore!")
-        if strings["ppsver"] != version:
-            print(strings["ppsver_warning"].format(strings["ppsver"], version))
+        try:
+            with open("ver") as version_file:
+                ver_strings = eval(version_file.read().strip())
+        except OSError:
+            print(strings[2])
+            ver_strings = {"number": "0.0.0"}
+            ver_strings["type"] = "vnotfound"
+            ver_strings["nickname"] = None
+        if strings["ppsver"] != ver_strings["number"]:
+            print(strings["ppsver_warning"].format(strings["ppsver"], ver_strings["number"]))
         language_string = strings["language_string"]
         lang = strings["language"]
 except Exception as e:
@@ -37,17 +37,18 @@ completion_status = None # This definition is only for avoiding tracebacks with 
 score = None # This definition is only for avoiding tracebacks with the last line of code. (which returns the completion_status and the score to the interpreter/os)
 
 try:
-    import os
-    import sys
-    import time
-    import traceback
+    import os, sys, time, traceback, multiprocessing
     
     args = sys.argv # This is just there to make the name shorter.
     
-    core_count = len(os.sched_getaffinity(0))
-    
     def argument(argument_to_search_for):
-        return argument_to_search_for in args
+        if not argument_to_search_for in args:
+            for arg in args:
+                if arg[0:len(argument_to_search_for)+1] == argument_to_search_for+"=":
+                    return arg.split("=", 1)[1]
+            return False
+        else:
+            return True
 
     def exists(var):
         if var != "":
@@ -60,13 +61,17 @@ try:
             return False
 
     def build_version_string():
-        if update_nickname:
-            version_string = "v{}-{} - {}".format(version, release_type, update_nickname)
+        if ver_strings["nickname"]:
+            version_string = "v{}-{} - {}".format(ver_strings["number"], ver_strings["type"], ver_strings["nickname"])
         else:
-            version_string = "v{}-{}".format(version, release_type)
+            version_string = "v{}-{}".format(ver_strings["number"], ver_strings["type"])
         return strings[1].format(version_string)
     
     print(build_version_string())
+    
+    if argument("--help") or argument("-h"):
+        print(strings["help"].format(example_command="pyperfscore[[ --singlecore| --multicore[=<subproc_count>][ --force-corecount]][ --cmdline| --gui[ --gui-alpha-features]][ --debug]| --update[ --exit]]"))
+        exit("help")
     
     if argument("--update"):
         completion_status = "update"
@@ -195,31 +200,39 @@ try:
         run_test(graphical=False)
     """
     
-    def test_nogui(core_count = 1):
-        # cycles = 10000000 # This is the default value. The actual definition of the value is at the top of this file for debug purposes.
-        def generate_load():
+    def test_nogui(subproc_count = 1):
+        # cycles = 10000000 # This is the default value. The actual definition of the value is near the top of the initialization part to make maintaining and debugging a little easier.
+        def generate_load(is_not_main_process=False):
             cycles_passed = 0
             test_percentage = 0
             print("{}...   ".format(strings[6][0]), end="\r")
             while cycles_passed <= cycles:
                 test_percentage_before = test_percentage
                 test_percentage = round((cycles_passed / 100) / (cycles / 100) * 100, 1)
-                if test_percentage != test_percentage_before:
-                    print("{}: {}%   ".format(strings[6][0], test_percentage), end="\r")
+                if not is_not_main_process:
+                    if test_percentage != test_percentage_before:
+                        print("{}: {}%   ".format(strings[6][0], test_percentage), end="\r")
                 cycles_passed += 1
         time_at_start = time.time() # Take a timestamp.
-        if core_count == 1:
+        if subproc_count < 1:
+            raise RuntimeError(strings[4][3].format(subproc_count))
+        elif subproc_count == 1:
             generate_load()
-#         elif core_count <= 2:
-#             # Two core test.
-#         elif core_count <= 4:
-#             # Four core test.
-#         elif core_count <= 8:
-#             # Eight core test.
-#         elif core_count <= 16:
-#             # Sixteen core test.
-        time_to_complete = time.time() - time_at_start # Subtract the first timestamp off the time now to get the time in seconds the counting took. 
-        print(strings[6][1].format(round(time_to_complete, 3), cycles))
+        elif subproc_count > 1:
+            p0 = multiprocessing.Process(target=generate_load)
+            p0.start()
+            for i in range(1, subproc_count):
+                exec("p{number} = multiprocessing.Process(target=generate_load, args=('1'))".format(number=i)) # This is a bit hacky, it shouldn't be a string handed to generate_load but instead the bool value True (which somehow caused a TypeError that a 'bool'-object is not iterable.).
+                exec("p{number}.start()".format(number=i))
+            p0.join()
+            print(strings[5][4], end="\r")
+            for i in range(1, subproc_count):
+                exec("p{number}.join()".format(number=i))
+        time_to_complete = time.time() - time_at_start # Subtract the first timestamp off the time now to get the time in seconds the counting took.
+        if subproc_count == 1:
+            print(strings[6][1].format(round(time_to_complete, 3), cycles))
+        else:
+            print(strings[5][3].format(round(time_to_complete, 3), cycles, subproc_count))
         try:
             global score
             score = cycles / time_to_complete # Calculate the score: divide the time the counting took by the number of cycles that the loop was run. 
@@ -229,18 +242,33 @@ try:
         return score
     
     def run_test(is_graphical = argument("--gui"), force_gui = argument("--gui-alpha-features")):
+        multicore_argument = argument("--multicore")
         if is_graphical:
             print(strings[7][0])
             gui_main_window = gui.generate_gui()
+            # Later on I will add the GUI and the function to start it will be test_gui().
         elif not is_graphical:
             if not argument("--singlecore") and not argument("--multicore"):
                 print(strings[4][1])
                 test_nogui()
             elif argument("--singlecore"):
                 test_nogui(1)
-            elif argument("--multicore"):
-                print(strings[4][2])
-                return test_nogui() # Give test_nogui() as argument the number of available cores.
+            elif multicore_argument:
+                max_cores = len(os.sched_getaffinity(0))
+                if multicore_argument != True:
+                    try:
+                        requested_cores = int(multicore_argument)
+                    except ValueError as e:
+                        requested_cores = max_cores
+                else:
+                    requested_cores = max_cores
+                if requested_cores > max_cores:
+                    corecount_warning_string = strings[5]["warning_corecount"].format(req_subpr=requested_cores, avail_cores=max_cores)
+                    print(corecount_warning_string)
+                    if not argument("--force-corecount"):
+                        exit(corecount_warning_string)
+                print(strings[4][2].format())
+                return test_nogui(requested_cores) # Give test_nogui() as argument the number of available cores.
     
     run_test()
     
@@ -253,6 +281,8 @@ except KeyboardInterrupt:
     print("\r{}".format(strings[8][2]))
     completion_status = "cancelled"
 except SystemExit as e:
+    if str(e) == "help":
+        exit()
     if argument("--debug"):
         args.remove("--debug")
     print(strings[8][3].format(e))
