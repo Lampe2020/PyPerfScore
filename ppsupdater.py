@@ -33,7 +33,13 @@ def argument(argument_to_search_for):
 
 try:
     with open("ver") as version_file:
-        ver_strings = eval(version_file.read().strip())
+        ver_strings = version_file.read().strip()
+        if len(ver_strings) > 5:
+            ver_strings = eval(ver_strings)
+        else:
+            ver_strings = {"number": ver_strings, "type": None, "nickname": None}
+    if argument("--link-in-PATH"):
+        ver_strings["number"] = "--link-in-PATH"
 except OSError:
     print(could_not_import_ver)
     ver_strings = {"number": "0.0.0"}
@@ -45,6 +51,9 @@ base_path_local = "./" # The local base path. "./" refers to the current working
 
 requested_ver = argument("--ver")
 requested_path = argument("--path")
+
+if argument("--link-in-PATH"):
+    requested_path = "/usr/share/PyPerfScore/"
 
 if requested_ver:
     if requested_ver in ("latest-stable", "stable"):
@@ -69,13 +78,13 @@ else:
 if requested_path:
     if not requested_path[-1] == "/":
         requested_path += "/"
-    if os.path.isdir(requested_path):
+    if not os.path.isdir(requested_path):
         try:
-            os.mkdir("".join([requested_path, "lang"]))
+            os.mkdir(requested_path)
         except FileExistsError:
             pass # If the directory already exists, just go on.
-        base_path_local = requested_path
-        ver_strings["number"] = "--path" # Tell the program that it's not installed yet where --path specifies it. This works by changing the version string to one that's definetly not the target ver_strings["number"]!
+    base_path_local = requested_path
+    ver_strings["number"] = "--path" # Tell the program that it's not installed yet where --path specifies it. This works by changing the version string to one that's definetly not the target version!
 
 try:
     latest_ver = requests.get("{}ver".format(base_path_remote)).text.strip()
@@ -95,7 +104,7 @@ if ver_strings["number"] != latest_ver:
         filename = filename.split("#")[0].strip() # This line removes possible comments from the file list by just taking everything before the first hashmark.
         if filename[-1] == "/":
             try:
-                os.mkdir(filename) # If there's a directory in files.list (recognizable by the / at the end of the name): create it if it doesn't exist yet.
+                os.mkdir("".join([base_path_local, filename])) # If there's a directory in files.list (recognizable by the / at the end of the name): create it if it doesn't exist yet.
             except FileExistsError:
                 pass
         if "→" in filename:
@@ -116,6 +125,17 @@ if ver_strings["number"] != latest_ver:
     
     os.chmod("".join([base_path_local, "ppsupdater.py"]), 0o775) # Make `ppsupdater.py` executable.
     os.chmod("".join([base_path_local, "PyPerfScore.py"]), 0o775) # Make `PyPerfScore.py` executable.
+    
+    if argument("--link-in-PATH"):
+        print("Creating commands...")
+        for filename, target in ("pyperfscore", "PyPerfScore.py"), ("ppsupdater", "ppsupdater.py"):
+            try:
+                with open("/bin/{} --link-in-PATH".format(filename), "w") as ppsfile:
+                    ppsfile.write("""#!/bin/bash
+    {}{} --link-in-path $@""".format(base_path_local, target))
+                    os.chmod("/bin/{}".format(filename), 0o775)
+            except Exception as e:
+                print(": ".join([type(e).__name__, str(e)]))
     
     raise SystemExit(strings[0]) # Notify the user that a restart of PyPerfScore is necessary and then quit.
 else:
