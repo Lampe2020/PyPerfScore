@@ -124,5 +124,5 @@ För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "h
         5: "Förfrågade versionen ({release}) kunde inte laddas ned för att den har ingen files.list!",
         6: "Kunde inte få versionssträngar, avslutar PyPerfScore..."
     },
-    11: "Försök inte att föra en `debug`-objekt, klassen existerar bara för att gruppera felsöksfunktionerna!"
+    11: "Försök inte att skapa en `debug`-objekt, klassen existerar bara för att gruppera felsöksfunktionerna!"
 }
