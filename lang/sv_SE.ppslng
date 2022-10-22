@@ -1,7 +1,7 @@
 # Den här är PyPerfScore-språkfilen för Svenska - Sverige (sv_SE).
 # Om du förstår inte syntaxen av den här filen var så snäll och ändrar ingenting här!
 # 
-# Detta filen var skapat från Christian Lampe <kontakt@lampe2020.de>
+# Detta filen har skapats av Christian Lampe <kontakt@lampe2020.de>
 {
     "ppsver": "0.4.0",
     "ppsver_warning": "Versionen av PyPerfScore som den importerade språkfilen har skapats för ({}) är inte programmversionen du användar nu ({}). Om PyPerfScore crashar eller visar meningslös text kan det vara därför.",
