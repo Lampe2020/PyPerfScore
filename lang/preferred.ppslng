@@ -3,7 +3,7 @@
 # 
 # This file was made by Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.4.0",
+    "ppsver": "0.4.1",
     "ppsver_warning": "The version of PyPerfScore which the imported language file is made for ({}) doesn't match the version you're using ({}). If PyPerfScore crashes unexpectedly or displays some nonsense, this may be the cause.",
     "language": "en",
     "language_string": "English",
@@ -94,12 +94,12 @@ Type "exit()" to exit the debug shell, type "help()" for more information.""",
     7: { # The GUI's text:
         0: "Starting GUI...",
         1: {
-            0: "Warning: tkinter could not be imported! Make sure to install it properly or otherwise PyPerfScore will only run in command line mode (pyperfscore --cmdline).",
-            1: "tkinter missing!",
+            0: "Warning: Gtk 4.0 or the `gi` module could not be imported! Make sure to install it properly or otherwise PyPerfScore will only run in command line mode (pyperfscore --cmdline).",
+            1: "Gtk4 missing!",
         },
         2: "The GUI is not implemented yet!",
         3: "PyPerfScoreGUI isn't implemented!",
-        4: "Notice: The GUI isn't implemented by now. I will work on that when the command line mode (pyperfscore --cmdline) is properly implemented."
+        4: "Notice: The GUI isn't implemented by now. I will work on that when the command line mode (pyperfscore --cmdline) is kinda implemented."
     },
     8: { # For the error handling:
         0: """Your computer seems to be too fast to run this test with a target number of {} cycles. Maybe raise the value of the variable "cycles"?""",
