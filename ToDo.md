@@ -1,7 +1,6 @@
 # To Do list:
 ## What I would like to do:   
-* add a GUI using `tkinter` (or better PyGTK, because of better theme integration) to make it more easily usable even for non-command-line users. 
-* add the multicore mode the program talks about on every start...   
+* add a GUI using `tkinter` (or better PyGTK, because of better theme integration) to make it more easily usable even for non-command-line users.  
 ## What has to be done:
 * Enable the updater to check if the version online (if unequal) is higher or lower and ask the user if they really want to downgrade if the download is a downgrade.
 * Change main `while` loop to:
