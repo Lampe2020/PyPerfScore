@@ -3,7 +3,7 @@
 # 
 # Diese Datei wurde erstellt von Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.4.0",
+    "ppsver": "0.4.1",
     "ppsver_warning": "Die Version von PyPerfScore, für die die importierte Sprachdatei gemacht ist ({}), stimmt nicht mit der von Ihnen genutzten Programmversion überein ({}). Wenn PyPerfScore unerwartet abstürzt oder irgendeinen Unsinn anzeigt, könnte dies das Problem sein.",
     "language": "de_DE",
     "language_string": "Deutsch - Deutschland",
@@ -49,14 +49,14 @@ Gebrauch: `{example_command}`
                                                angezeigt.
     """,
     0: """Sprache "{}" ({}) erfolgreich importiert!""",
-    1: """Sie nutzen PyPerfScore {}. Um auf neue Versionen zu überprüfen, schauen Sie bei "https://github.com/Stehlampe2020/PyPerfScore" nach.""",
-    2: "Konnte die eigene Version nicht feststellen, setze Version auf 0.0.0...",
+    1: """Sie nutzen PyPerfScore {}. Um auf neue Versionen zu überprüfen, führe Sie PyPerfScore mit der `--update`-Option aus oder schauen Sie bei "https://github.com/Stehlampe2020/PyPerfScore" nach.""",
+    2: "Konnte die installierte Versionsnummer nicht feststellen, setze Version auf 0.0.0...",
     3: { # Für die debug()-Klasse:
         0: "Die Minishell wurde mit einem ungültigen Argument für advanced_minishell aufgerufen: {} ({})",
         1: """
     PyPerfScore {}Debug-Eingabeaufforderung help() (Hilfefunktion):
     Diese Eingabeaufforderung ist nur für Debugzwecke.
-    Sie hat keinen Befehlsverlauf (ich habe nicht vor, einen hinzuzufügen) und die Fähigkeit, mehrzeilige Ausdrücke zu interpretieren.
+    Sie hat keinen Befehlsverlauf (ich habe nicht vor, einen hinzuzufügen) und auch nicht die Fähigkeit, mehrzeilige Ausdrücke zu interpretieren.
     Letzteres sollte von der Funktion exists(<string>) überflüssig gemacht werden, die
     → True zurückgibt, wenn ein Objekt mit dem Namen <string> existiert und
     → False zurückgibt, wenn kein Objekt mit dem Namen <string> existiert.
@@ -84,16 +84,16 @@ Geben Sie "exit()" ein, um die Debug-Eingabeaufforderung zu verlassen, "help()" 
     4: { # multiprocessing-spezifischer text:
         0: "multithreading: noch nicht implementiert!",
         1: "Weil Sie kein Argument angegeben haben, das festlegt, ob der Test im Einzel- oder Mehrkernmodus gestartet werden soll, wird der Standard geladen.",
-        2: "Der Mehrkernmodus ist noch experimentell!",
-        3: "Sie können nicht weniger als einen Prozessorkern haben! (aber starteten den Test mit einem core_count von {})"
+        2: "Der Multiprozessmodus ist noch experimentell!",
+        3: "Sie können nicht weniger als einen Prozessorkern haben! (aber starteten den Test mit einem `core_count` von {})"
     }
     5: { # Für die Argumentauslesung:
         "warning_corecount": "WARNUNG! Sie versuchen, PyPerfScore mit mehr Subprozessen ({req_subpr}) als verfügbaren Prozessorkernen ({avail_cores}) auszuführen! Dies könnte Ihren Rechner zum Absturz bringen!",
         0: "Keine Argumente erkannt, wird im Standardmodus ausgeführt...",
         1: "Sie haben keine Argumente außer --debug angegeben, wird im Standardmodus mit anschließender Eingabeaufforderung ausgeführt...",
-        2: "{}: unbekanntes Argument! Ignoriere es...",
+        2: "{}: unbekanntes Argument! Ignorieren...",
         3: "Ihr Rechner brauchte {} Sekunden, um so schnell wie möglich von null bis {} auf {} Prozessorkernen zu zählen.",
-        4: "Warte darauf, dass die anderen Prozessorkerne fertigzählen..."
+        4: "Warte darauf, dass die anderen Unterprozesse fertigzählen..."
     },
     6: { # Für den Test selbst:
         0: "Test wird ausgeführt",
@@ -103,8 +103,8 @@ Geben Sie "exit()" ein, um die Debug-Eingabeaufforderung zu verlassen, "help()" 
     7: { # Der Text der graphischen Oberfläche:
         0: "Graphische Oberfläche wird gestartet...",
         1: {
-            0: "Warnung: tkinter konnte nicht importiert werden! Stellen Sie sicher, dieses Modul korrekt zu installieren, andernfalls kann PyPerfScore nur im Kommandozeilenmodus (pyperfscore --cmdline) ausgeführt werden.",
-            1: "tkinter fehlt!",
+            0: "Warnung: Gtk 4.0 oder das Modul `gi` konnte nicht importiert werden! Stellen Sie sicher, dieses Modul korrekt zu installieren, andernfalls kann PyPerfScore nur im Kommandozeilenmodus (pyperfscore --cmdline) ausgeführt werden.",
+            1: "Gtk4 fehlt!",
         },
         2: "Die graphische Oberfläche ist noch nicht implementiert!",
         3: "PyPerfScoreGUI ist nicht implementiert!",
