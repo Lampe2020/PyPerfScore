@@ -204,7 +204,7 @@ try:
         def generate_load(is_not_main_process=False):
             cycles_passed = 0
             test_percentage = 0
-            print(f'{strings[6][0]}', end='\r'
+            print(f'{strings[6][0]}', end='\r')
             while cycles_passed <= cycles:
                 test_percentage_before = test_percentage
                 test_percentage = round((cycles_passed / 100) / (cycles / 100) * 100, 1)
