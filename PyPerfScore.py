@@ -221,7 +221,7 @@ try:
             p0 = multiprocessing.Process(target=generate_load)
             p0.start()
             for i in range(1, subproc_count):
-                exec(f'p{i} = multiprocessing.Process(target=generate_load, args=('1'))') # This is a bit hacky, it shouldn't be a string handed to generate_load but instead the bool value True (which somehow caused a TypeError that a 'bool'-object is not iterable.).
+                exec(f'p{i} = multiprocessing.Process(target=generate_load, args=("1"))') # This is a bit hacky, it shouldn't be a string handed to generate_load but instead the bool value True (which somehow caused a TypeError that a 'bool'-object is not iterable.).
                 exec(f'p{i}.start()')
             p0.join()
             print(strings[5][4], end="\r")
