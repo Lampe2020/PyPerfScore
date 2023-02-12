@@ -3,25 +3,25 @@
 # 
 # Detta filen har skapats av Christian Lampe <kontakt@lampe2020.de>
 {
-    "ppsver": "0.4.0",
-    "ppsver_warning": "Versionen av PyPerfScore som den importerade språkfilen har skapats för ({}) är inte programmversionen du användar nu ({}). Om PyPerfScore crashar eller visar meningslös text kan det vara därför.",
-    "language": "sv_SE-BETA",
-    "language_string": "Svenska - Sverige (BETA)",
+    "ppsver": "0.4.1",
+    "ppsver_warning": "Versionen av PyPerfScore som den importerade språkfilen har skapats för ({}) är inte programmversionen du användar nu ({}). Om PyPerfScore kraschar eller visar sammanhangs-/meningslös text kan det vara därför.",
+    "language": "sv_SE",
+    "language_string": "Svenska - Sverige",
     "help": """
 PyPerfScore är en Python3-baserad CPU-benchmark.
 
 Användning: `{example_command}`
     --singlecore|--multicore[=<subproc_count>] Startar PyPerfScore i enkelkärn-
                                                / flerkärnläge, optionellt med
-                                               <subproc_count> subprocesser.
-                                               Tip: Om <subproc_count> är högre
-                                               än antalet av darorns
+                                               <subproc_count> underprocesser.
+                                               Tips: Om <subproc_count> är
+                                               högre än antalet av darorns
                                                processorkärnor måste du ange
                                                `--force-corecount` om du vill
                                                att testet körs med så många
-                                               subprocesser.
+                                               underprocesser.
     --cmdline|--gui                            Startar PyPerfScore explicit i
-                                               kommandoytan- / grafisk läget.
+                                               kommandorads- / grafiska läget.
     --debug                                    Startar PyPerfScore i
                                                felsöksläget som låter dig
                                                inspektera namnutrymmet efter
@@ -29,45 +29,45 @@ Användning: `{example_command}`
     --update[ --exit| <args>]                  Uppdaterar PyPerfScore till
                                                nyaste versionen. Om PyPerfScore
                                                är redan på nyaste versionen och
-                                               `--exit`-argumenten saknas
-                                               kommer testet att köra med
+                                               `--exit`-argumentet saknas
+                                               kommer testet att köras med
                                                argumenterna <args>.
     --help|-h[ --gui]                          Visar denna hjälptext och
-                                               avslutar PyPerfScore. Om grafisk
-                                               programytan är installerad och
-                                               du anger båda `--help`- och
-                                               `--gui`-argumentet kommer
-                                               hjälptextet att också visas i en
-                                               grafisk fönster.
+                                               avslutar PyPerfScore. Om
+                                               grafiska programytan är
+                                               installerad och du anger både
+                                               `--help`- och `--gui`-argumentet
+                                               kommer hjälptextet att också
+                                               visas i ett grafiskt fönster.
     """,
-    0: """Språket "{}" ({}) importerats framgångsrik!""",
-    1: """Du användar PyPerfScore {}. För att få en nyare version, gå till "https://github.com/Stehlampe2020/PyPerfScore".""",
-    2: "Kunde inte hitta egen versionsnummer! Sätta den till 0.0.0...",
+    0: """Språket "{}" ({}) importerats framgångsrikt!""",
+    1: """Du använder PyPerfScore {}. För att få en nyare version, starta PyPerfScore med `--update`-argumentet eller gå till "https://github.com/Stehlampe2020/PyPerfScore".""",
+    2: "Kunde inte hitta versionsnummret! Sätta den till 0.0.0...",
     3: { # För debug()-klassen:
         0: "Minishell kallas med ogiltig argument för `advanced_minishell`: {} ({})",
         1: """
     PyPerfScore {}minishell help():
     Denna minishell är bara för felsökning.
-    Den har ingen kommandohistorik (jag planera inte att tillfoga den) och kan ochså inte interpretar flerradexpressioner.
-    De sista skulle vara onödig med exists(<string>), som ger
-    → True tillbaka om en objekt med namnen <string> existerar och
-    → False tillbaka om ingen objekt med namnen <string> existerar.
+    Den har ingen kommandohistorik (jag tänker inte att tillfoga den) och kan inte heller interpretera flerradexpressioner.
+    De sista skulle vara onödiga med exists(<string>), som ger
+    → True tillbaka om ett objekt med namnet <string> existerar och
+    → False tillbaka om inget objekt med namnet <string> existerar.
     {}""",
         2: "avancerade ",
         3: """
-    Den avancerade minishell kan interpretera nyckelord men skriver inte bakgervärder (använd print() för det).
+    Den avancerade minishellen kan interpretera nyckelord men skriver inte bakgervärder (använd print() för det).
     """,
         4: """
-    Nyckelord fungerar inte i den här minishell, använd avancerade minishellen för det.
+    Nyckelord fungerar inte i den här minishellen, använd avancerade minishellen för det.
     Avancerade minishellen kan startas med `debug.minishell("switching_shells", True)`.
     """,
-        5: "Hmmm... Något skener har crashad (se utgav över den här raden för flera detailjer). Vilken tur att PyPerfScore kunde öppna minishellen efter felet:",
+        5: "Hmmm... Något skener har kraschat (se utgav ovanför den här raden för fler detailjer). Vilken tur att PyPerfScore kunde öppna minishellen efter felet:",
         6: "PyPerfScore bröts av (t.ex. med en KeyboardInterrupt). Här är en simpel felsökminishell för att inspektera allt:",
-        7: "PyPerfScore fulländade att köra. Här är en simpel felsökminishell för att inspektera allt:",
+        7: "PyPerfScore slutfördes. Här är en simpel felsökminishell för att inspektera allt:",
         8: "\nDu kan gå tillbaka till den sista minishellen med att använda `exit()`.\nHär är den nya felsökminishellen:",
-        9: "Ingen fail_status gavs till `debug.minishell()`!\n\nHur som helst, här är felsökminishellen:",
-        10: "Felaktig fail_status gavs till `debug.minishell()`:\n{}\n{}\n\nHur som helst, här är minishellen:",
-        11: """Flerradexpressioner (likna try...except...finally) och kommandohistorik fungerar inte i den här felsökminishellen.
+        9: "Ingen `fail_status` gavs till `debug.minishell()`!\n\nHur som helst, här är felsökminishellen:",
+        10: "Felaktig `fail_status` gavs till `debug.minishell()`:\n{}\n{}\n\nHur som helst, här är minishellen:",
+        11: """Flerradexpressioner (t.ex. try...except...finally) och kommandohistorik fungerar inte i den här felsökminishellen.
 För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "help()".""",
         12: "Lämnar felsökminishellen...",
         13: "\nEn {} har upphöjats.\n{}",
@@ -75,39 +75,39 @@ För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "h
     },
     4: { # multiprocessing-specifisk text:
         0: "multithreading: Inte än implementerad!",
-        1: "För att du gav ingen argument som bestämmer om PyPerfScore ska köra i enkel- eller flerkärnläge standarden ska laddas.",
+        1: "För att du gav inget argument som bestämmer om PyPerfScore ska köra i enkel- eller flerkärnläge ska standarden laddas.",
         2: "Flerkärnläget är experimentell just nu!",
-        3: "Du kan inte ha mindre än en processorkärna! (men startade testet med en core_count av {})"
+        3: "Du kan inte ha mindre än en processorkärna! (men startade testet med en `core_count` av {})"
     },
     5: { # För argumentbehandling:
-        "warning_corecount": "VARNING! Du vörsöker köra PyPerfScore med flera subprocesser ({req_subpr}) än tillgängliga processorkärnor ({avail_cores})! Detta kan kommer att krascha din dator!",
+        "warning_corecount": "VARNING! Du vörsöker köra PyPerfScore med fler underprocesser ({req_subpr}) än tillgängliga processorkärnor ({avail_cores})! Detta kan kommer att krascha din dator!",
         0: "Hittade inga argumenter, kör nu i standardläge...",
-        1: "Du gav ingen argument utan --debug argumenten, kör nu i standardläge men med felsöksminishell...",
+        1: "Du gav bara `--debug`-argumentet, kör nu i standardläge men med felsöksminishell...",
         2: "{}: okänd argument! Ignorerar den...",
-        3: "Din dator behövde {} sekunder för att tala från null till {} på {} processorkärnor.",
-        4: "Väntar på att de andra processorkärnor slutar tala..."
+        3: "Din dator behövde {} sekunder för att tala från noll till {} i {} processer.",
+        4: "Väntar på att de andra processerna slutar tala..."
     },
-    6: { # För testet sig själv:
+    6: { # För själva testet:
         0: "Kör testet",
-        1: "Din dator behövde {} sekunder för att tala från null till {} så snabb som möjlig.",
-        2: "Så din dator har {} punkter."
+        1: "Din dator behövde {} sekunder för att tala från noll till {} så snabb som möjlig.",
+        2: "Det betyder att din dator har {} punkter."
     },
     7: { # Text för grafisk programytan:
         0: "Startar grafisk programmyta...",
         1: {
-            0: "Varning: tkinter kunde inte importeras! Installera tkinter ordentligt! Om du inde göra det kan PyPerfScore bara kör i kommandoytaläge (pyperfscore --cmdline).", # "kommandoytaläge"?! Jag är inte säker på detta ord. Jag måste kanske ändra på det...
-            1: "tkinter saknas!",
+            0: "Varning: Gtk 4.0 eller modulen `gi` kunde inte importeras! Installera PyGTK ordentligt! Om du inde göra det kan PyPerfScore bara köras i kommandoradsläge (pyperfscore --cmdline).",
+            1: "Gtk4 saknas!",
         },
-        2: "Grafisk programytan är inte implementerad!",
+        2: "Grafiska programytan är inte implementerad!",
         3: "PyPerfScoreGUI är inte implementerad!",
-        4: "Tip: Grafisk programytan är inte än implementerad! Jag ska bry om den när kommandoytalägen (pyperfscore --cmdline) är implementerad ordentligt."
+        4: "Tips: Grafiska programytan är inte än implementerad! Jag ska bry om den när kommandoytalägen (pyperfscore --cmdline) är så perfekt jag kan göra det."
     },
-    8: { # For the error handling:
-        0: """Din dator är för snabb för en målnummer av {} rundor. Kanske hjälper det om du förstorar målnummern "cycles"?""",
-        1: "Flera moduler kunde inte importeras, följande text är de tekniska information om felet:",
+    8: { # För felbehandlingen:
+        0: """Din dator är för snabb för ett målnummer av {}. Det hjälper kanske om du förstorar målnummret "cycles"?""",
+        1: "Flera moduler kunde inte importeras, följande textet är de tekniska informationerna om felet:",
         2: "En KeyboardInterrupt har upphöjats.",
         3: "En genast stop av PyPerfScore förfrågats (en SystemExit har upphöjats) med följande feltextet: {}",
-        4: "En oväntad fel uppstod, följande text är de tekniska information om felet:"
+        4: "Ett oväntat fel uppstod, följande textet är de tekniska informationerna om felet:"
     },
     9: "Avsluta PyPerfScore...",
     10: { # För uppdaterare:
@@ -115,7 +115,7 @@ För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "h
             0: "söket för en ny version",
             1: "nedladdningen av den nyaste version"
         },
-        "conn_error": "En nätfel uppstod medan {}. Fel text: {}",
+        "conn_error": "Ett nätfel uppstod medan {}. Feltext: {}",
         0: "Du måste starta om PyPerfScore efter uppdateringen!",
         1: "En uppdatering är tillgängligt på webben! ({ver_old} → {ver_new}) Installerar...",
         2: "Versionen är redan installerat!",
@@ -124,5 +124,5 @@ För att lämna minishellen knappa in "exit()", för att få hjälp knappa in "h
         5: "Förfrågade versionen ({release}) kunde inte laddas ned för att den har ingen files.list!",
         6: "Kunde inte få versionssträngar, avslutar PyPerfScore..."
     },
-    11: "Försök inte att skapa en `debug`-objekt, klassen existerar bara för att gruppera felsöksfunktionerna!"
+    11: "Försök inte att skapa ett `debug`-objekt, klassen existerar bara för att gruppera felsöksfunktionerna!"
 }
